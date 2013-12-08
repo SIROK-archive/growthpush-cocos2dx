@@ -17,11 +17,14 @@ Android
       + android-support-v4.jar
       + google-play-services.jar
       + growthpush.jar
-2. Copy src/proj.android/src/com to /path/to/your_project/proj.android/src
-3. Add build path to Android.mk
+2. Edit your project AndroidManifest.xml
+      + Insert GrowthPush activity
+      + Insert uses-permission
+3. Copy src/proj.android/src/com to /path/to/your_project/proj.android/src
+4. Add build path to Android.mk
       + ../../Classes/GrowthPush/android/GrowthPushPlugin.cpp
       + $(LOCAL_PATH)/../../Classes/GrowthPush
-4. Add GrowthPushPlugin class to your project Activity
+5. Add GrowthPushPlugin class to your project Activity
 
 Example
 
