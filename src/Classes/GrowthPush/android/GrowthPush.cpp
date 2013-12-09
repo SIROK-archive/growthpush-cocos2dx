@@ -1,12 +1,12 @@
 //
-//  GrowthPushPlugin.cpp
+//  GrowthPush.cpp
 //  GrowthPushPlugin
 //
 //  Created by TSURUDA Ryo on 2013/12/08.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#include "GrowthPushPlugin.h"
+#include "GrowthPush.h"
 
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
@@ -15,17 +15,17 @@
 USING_NS_CC;
 USING_NS_GROWTHPUSH;
 
-const char *JavaClassName = "com/growthpush/cocos2dx/GrowthPushPlugin";
+const char *JavaClassName = "com/growthpush/cocos2dx/GrowthPushJNI";
 
-GrowthPushPlugin::GrowthPushPlugin(void)
+GrowthPush::GrowthPush(void)
 {
 }
 
-GrowthPushPlugin::~GrowthPushPlugin(void)
+GrowthPush::~GrowthPush(void)
 {
 }
 
-void GrowthPushPlugin::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug)
+void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug)
 {
     CCAssert(secret, "secret should not be NULL");
     
@@ -38,7 +38,12 @@ void GrowthPushPlugin::initialize(int applicationId, const char *secret, growthp
     }
 }
 
-void GrowthPushPlugin::registerDeviceToken(const char *senderId)
+void GrowthPush::registerDeviceToken(void)
+{
+    // Do nothing on Android
+}
+
+void GrowthPush::registerDeviceToken(const char *senderId)
 {
     CCAssert(senderId, "senderId should not be NULL");
     
@@ -51,7 +56,7 @@ void GrowthPushPlugin::registerDeviceToken(const char *senderId)
     }
 }
 
-void GrowthPushPlugin::trackEvent(const char *name)
+void GrowthPush::trackEvent(const char *name)
 {
     CCAssert(name, "name should not be NULL");
     
@@ -64,7 +69,7 @@ void GrowthPushPlugin::trackEvent(const char *name)
     }
 }
 
-void GrowthPushPlugin::trackEvent(const char *name, const char *value)
+void GrowthPush::trackEvent(const char *name, const char *value)
 {
     CCAssert(name, "name should not be  NULL");
     CCAssert(value, "value should not be  NULL");
@@ -80,7 +85,7 @@ void GrowthPushPlugin::trackEvent(const char *name, const char *value)
     }
 }
 
-void GrowthPushPlugin::setTag(const char *name)
+void GrowthPush::setTag(const char *name)
 {
     CCAssert(name, "name should not be  NULL");
     
@@ -93,7 +98,7 @@ void GrowthPushPlugin::setTag(const char *name)
     }
 }
 
-void GrowthPushPlugin::setTag(const char *name, const char *value)
+void GrowthPush::setTag(const char *name, const char *value)
 {
     CCAssert(name, "name should not be  NULL");
     CCAssert(value, "value should not be  NULL");
@@ -109,11 +114,16 @@ void GrowthPushPlugin::setTag(const char *name, const char *value)
     }
 }
 
-void GrowthPushPlugin::setDeviceTags(void)
+void GrowthPush::setDeviceTags(void)
 {
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, JavaClassName, "setDeviceTags", "()V")) {
         t.env->CallStaticVoidMethod(t.classID, t.methodID);
         t.env->DeleteLocalRef(t.classID);
     }
+}
+
+void GrowthPush::clearBadge(void)
+{
+    // Do nothing on Android
 }

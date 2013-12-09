@@ -1,13 +1,13 @@
 //
-//  GrowthPushPlugin.h
+//  GrowthPush.h
 //  GrowthPushPlugin
 //
 //  Created by TSURUDA Ryo on 2013/12/07.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#ifndef GROWTHPUSHPLUGIN_GROWTHPUSHPLUGIN_H_
-#define GROWTHPUSHPLUGIN_GROWTHPUSHPLUGIN_H_
+#ifndef GROWTHPUSHPLUGIN_GROWTHPUSH_H_
+#define GROWTHPUSHPLUGIN_GROWTHPUSH_H_
 
 #include "ccMacros.h"  // for CC_DLL
 
@@ -16,7 +16,7 @@
 
 NS_GROWTHPUSH_BEGIN
 
-class CC_DLL GrowthPushPlugin
+class CC_DLL GrowthPush
 {
 public:
     /**
@@ -27,37 +27,19 @@ public:
      * @param environment Build configuration (debug or release)
      * @param debug Debug mode
      */
-    static void initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug);
+    static void initialize(int applicationId, const char *secret, GPEnvironment environment, bool debug);
     
     /**
-     * Initialize GrowthPush instance and register the client device if not yet been registered (Only iOS)
-     *
-     * @param applicationId Application ID
-     * @param secret Secret key for application
-     * @param environment Build configuration (debug or release)
-     * @param debug Debug mode
-     * @param option option flags
+     * Set device token
      */
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    static void initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug, growthpush::EGPOption option);
-#endif
-    
-    /**
-     * Request APNS device token and set device token (Only iOS)
-     *
-     */
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     static void registerDeviceToken(void);
-#endif
     
     /**
-     * Set device token (Only Android)
+     * Set device token
      *
      * @param senderID Google Project Number
      */
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     static void registerDeviceToken(const char *senderId);
-#endif
     
     /**
      * Track event
@@ -95,17 +77,15 @@ public:
     static void setDeviceTags(void);
     
     /**
-     * Clear badge of app icon (Only iOS)
+     * Clear badge of app icon
      */
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     static void clearBadge(void);
-#endif
     
 private:
-    GrowthPushPlugin(void);
-    virtual ~GrowthPushPlugin(void);
+    GrowthPush(void);
+    virtual ~GrowthPush(void);
 };
 
 NS_GROWTHPUSH_END
 
-#endif  // GROWTHPUSHPLUGIN_GROWTHPUSHPLUGIN_H_
+#endif  // GROWTHPUSHPLUGIN_GROWTHPUSH_H_

@@ -9,7 +9,8 @@
 #import "UIApplication+GrowthPushPlugin.h"
 
 #import <objc/runtime.h>
-#import <GrowthPush/GrowthPush.h>
+
+#import "GrowthPushInternal.h"
 
 @implementation UIApplication (GrowthPushPlugin)
 
@@ -53,7 +54,8 @@ void swizze(Class cls, SEL oldSelector, SEL newSelector, IMP imp)
 
 void gp_didRegisterForRemoteNotificationsWithDeviceTokenRuntime(id self, SEL aSel, id application, id deviceToken)
 {
-    [GrowthPush setDeviceToken:deviceToken];
+    [GrowthPushInternal setDeviceToken:deviceToken];
+    
     if ([self respondsToSelector:@selector(application:gp_didRegisterForRemoteNotificationsWithDeviceToken:)]) {
         [self application:application gp_didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
     }
