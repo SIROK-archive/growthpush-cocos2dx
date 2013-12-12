@@ -1,6 +1,6 @@
 //
-//  UIApplication+GrowthPushPlugin.h
-//  GrowthPushPlugin
+//  UIApplication+GrowthPushCCInternal.h
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/08.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIApplication (GrowthPushPluginInterface)
+@interface UIApplication (GrowthPushCCInternalInterface)
 
 - (BOOL)application:(UIApplication *)application gp_didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 

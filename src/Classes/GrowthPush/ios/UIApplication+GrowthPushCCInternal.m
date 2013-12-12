@@ -1,18 +1,18 @@
 //
-//  UIApplication+GrowthPushPlugin.m
-//  GrowthPushPlugin
+//  UIApplication+GrowthPushCCInternal.m
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/08.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#import "UIApplication+GrowthPushPlugin.h"
+#import "UIApplication+GrowthPushCCInternal.h"
 
 #import <objc/runtime.h>
 
-#import "GrowthPushInternal.h"
+#import "GrowthPushCCInternal.h"
 
-@implementation UIApplication (GrowthPushPlugin)
+@implementation UIApplication (GrowthPushCCInternal)
 
 void swizze(Class cls, SEL oldSelector, SEL newSelector, IMP imp)
 {
@@ -62,7 +62,7 @@ void swizze(Class cls, SEL oldSelector, SEL newSelector, IMP imp)
 
 BOOL gp_didFinishLaunchingWithOptionsRuntime(id self, SEL aSel, id application, id launchOptions)
 {
-    [GrowthPushInternal didFinishLaunchingWithOptions:launchOptions];
+    [GrowthPushCCInternal didFinishLaunchingWithOptions:launchOptions];
     
     if ([self respondsToSelector:@selector(application:gp_didFinishLaunchingWithOptions:)]) {
 		return [self application:application gp_didFinishLaunchingWithOptions:launchOptions];
@@ -72,7 +72,7 @@ BOOL gp_didFinishLaunchingWithOptionsRuntime(id self, SEL aSel, id application, 
 
 void gp_didReceiveRemoteNotificationRuntime(id self, SEL aSel, id application, id userInfo)
 {
-    [GrowthPushInternal didReceiveRemoteNotification:userInfo];
+    [GrowthPushCCInternal didReceiveRemoteNotification:userInfo];
     
     if ([self respondsToSelector:@selector(application:gp_didReceiveRemoteNotification:)]) {
 		return [self application:application gp_didReceiveRemoteNotification:userInfo];
@@ -81,7 +81,7 @@ void gp_didReceiveRemoteNotificationRuntime(id self, SEL aSel, id application, i
 
 void gp_didRegisterForRemoteNotificationsWithDeviceTokenRuntime(id self, SEL aSel, id application, id deviceToken)
 {
-    [GrowthPushInternal didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    [GrowthPushCCInternal didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
     
     if ([self respondsToSelector:@selector(application:gp_didRegisterForRemoteNotificationsWithDeviceToken:)]) {
         [self application:application gp_didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
@@ -90,7 +90,7 @@ void gp_didRegisterForRemoteNotificationsWithDeviceTokenRuntime(id self, SEL aSe
 
 void gp_didFailToRegisterForRemoteNotificationsWithErrorRuntime(id self, SEL aSel, id application, id error)
 {
-    [GrowthPushInternal didFailToRegisterForRemoteNotificationsWithError:error];
+    [GrowthPushCCInternal didFailToRegisterForRemoteNotificationsWithError:error];
     
     if ([self respondsToSelector:@selector(application:gp_didFailToRegisterForRemoteNotificationsWithError:)]) {
         [self application:application gp_didFailToRegisterForRemoteNotificationsWithError:error];

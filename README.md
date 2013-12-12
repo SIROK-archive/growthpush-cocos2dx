@@ -70,16 +70,16 @@ Example
 ```
 void HelloWorld::onEnter() {
     CCLayer::onEnter();
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(HelloWorld::didReceivedRemoteNotification),
-                                                                  kGPDidReceivedNotification, NULL);
+    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(HelloWorld::didReceiveRemoteNotification),
+                                                                  kGPDidReceiveRemoteNotification, NULL);
 }
 
 void HelloWorld::onExit() {
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, kGPDidReceivedNotification);
+    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, kGPDidReceiveRemoteNotification);
     CCLayer::onExit();
 }
 
-void HelloWorld::didReceivedRemoteNotification(CCObject *sender)
+void HelloWorld::didReceiveRemoteNotification(CCObject *sender)
 {
     // ex.) {"aps":{"badge":1,"sound":"default","alert":"Message"},"growthpush":{"notificationId":1234}}
     CCDictionary *json = (CCDictionary *)sender;

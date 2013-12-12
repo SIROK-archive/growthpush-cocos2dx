@@ -1,6 +1,6 @@
 //
 //  GrowthPush.h
-//  GrowthPushPlugin
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/07.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
@@ -17,7 +17,7 @@
 NS_GROWTHPUSH_BEGIN
 
 /* APNS/GCM did received notification */
-extern const char *kGPDidReceivedNotification;
+extern const char *kGPDidReceiveRemoteNotification;
 
 class CC_DLL GrowthPush
 {
@@ -89,7 +89,7 @@ private:
     GrowthPush(void);
     virtual ~GrowthPush(void);
     
-    static void setNotificationCallback(void);
+    static void setRemoteNotificationCallback(void);
 };
 
 NS_GROWTHPUSH_END

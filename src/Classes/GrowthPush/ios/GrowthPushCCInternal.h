@@ -1,6 +1,6 @@
 //
-//  GrowthPushInternal.h
-//  GrowthPushPlugin
+//  GrowthPushCCInternal.h
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/09.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
@@ -11,9 +11,9 @@
 #import <GrowthPush/EGPOption.h>
 #import <GrowthPush/GPEnvironment.h>
 
-typedef void (^GPDiDreceivedNotificationCompletion)(NSString *jsonString);
+typedef void (^GPDidReceiveRemoteNotificationCompletion)(NSString *jsonString);
 
-@interface GrowthPushInternal : NSObject
+@interface GrowthPushCCInternal : NSObject
 
 + (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(GPEnvironment)environment debug:(BOOL)debug;
 + (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(GPEnvironment)environment debug:(BOOL)debug option:(EGPOption)option;
@@ -25,7 +25,7 @@ typedef void (^GPDiDreceivedNotificationCompletion)(NSString *jsonString);
 + (void)setDeviceTags;
 + (void)clearBadge;
 
-+ (void)setDidReceivedNotificationBlock:(GPDiDreceivedNotificationCompletion)block;
++ (void)setDidReceivedNotificationBlock:(GPDidReceiveRemoteNotificationCompletion)block;
 
 + (void)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;

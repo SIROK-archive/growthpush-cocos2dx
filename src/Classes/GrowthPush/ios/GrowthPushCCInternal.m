@@ -1,26 +1,26 @@
 //
-//  GrowthPushInternal.m
-//  GrowthPushPlugin
+//  GrowthPushCCInternal.m
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/09.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#import "GrowthPushInternal.h"
+#import "GrowthPushCCInternal.h"
 
 #import <GrowthPush/GrowthPush.h>
 
-#import "UIApplication+GrowthPushPlugin.h"
+#import "UIApplication+GrowthPushCCInternal.h"
 
-static GPDiDreceivedNotificationCompletion s_didReceivedBlock = NULL;
+static GPDidReceiveRemoteNotificationCompletion s_didReceiveRemoteNotificationBlock = NULL;
 
-@implementation GrowthPushInternal
+@implementation GrowthPushCCInternal
 
 - (void)dealloc
 {
-    if (s_didReceivedBlock) {
-        Block_release(s_didReceivedBlock);
-        s_didReceivedBlock = NULL;
+    if (s_didReceiveRemoteNotificationBlock) {
+        Block_release(s_didReceiveRemoteNotificationBlock);
+        s_didReceiveRemoteNotificationBlock = NULL;
     }
     [super dealloc];
 }
@@ -77,12 +77,12 @@ static GPDiDreceivedNotificationCompletion s_didReceivedBlock = NULL;
     [GrowthPush clearBadge];
 }
 
-+ (void)setDidReceivedNotificationBlock:(GPDiDreceivedNotificationCompletion)block
++ (void)setDidReceivedNotificationBlock:(GPDidReceiveRemoteNotificationCompletion)block
 {
-    if (s_didReceivedBlock) {
-        Block_release(s_didReceivedBlock);
+    if (s_didReceiveRemoteNotificationBlock) {
+        Block_release(s_didReceiveRemoteNotificationBlock);
     }
-    s_didReceivedBlock = Block_copy(block);
+    s_didReceiveRemoteNotificationBlock = Block_copy(block);
 }
 
 + (void)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -105,7 +105,7 @@ static GPDiDreceivedNotificationCompletion s_didReceivedBlock = NULL;
 
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    if (s_didReceivedBlock) {
+    if (s_didReceiveRemoteNotificationBlock) {
         NSError *error = nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo options:0 error:&error];
         if (error) {
@@ -115,7 +115,7 @@ static GPDiDreceivedNotificationCompletion s_didReceivedBlock = NULL;
         
         NSString *json = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
         if (json) {
-            s_didReceivedBlock(json);
+            s_didReceiveRemoteNotificationBlock(json);
         }
     }
 }

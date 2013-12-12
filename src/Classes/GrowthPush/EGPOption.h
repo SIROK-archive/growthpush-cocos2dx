@@ -1,6 +1,6 @@
 //
 //  EGPOption.h
-//  GrowthPushPlugin
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/07.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  GPJsonHelper.h
-//  GrowthPushPlugin
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/11.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
@@ -14,9 +14,9 @@
 #include "cocos2d.h"
 #include "picojson.h"
 
-//#if 0x00020100 <= COCOS2D_VERSION
-//#define GP_CAN_USE_BOOL_DOUBLE_OBJECT 1
-//#endif
+#if 0x00020100 <= COCOS2D_VERSION
+#define GP_CAN_USE_BOOL_DOUBLE_OBJECT 1
+#endif
 
 USING_NS_CC;
 

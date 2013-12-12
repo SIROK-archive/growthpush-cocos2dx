@@ -1,6 +1,6 @@
 //
 //  GrowthPush.mm
-//  GrowthPushPlugin
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/07.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
@@ -9,11 +9,11 @@
 #include "GrowthPush.h"
 
 #include "GPJsonHelper.h"
-#include "GrowthPushInternal.h"
+#include "GrowthPushCCInternal.h"
 
 USING_NS_GROWTHPUSH;
 
-const char *growthpush::kGPDidReceivedNotification = "GPDidReceivedNotification";
+const char *growthpush::kGPDidReceiveRemoteNotification = "GPDidReceiveRemoteNotification";
 
 GrowthPush::GrowthPush(void)
 {
@@ -27,16 +27,16 @@ void GrowthPush::initialize(int applicationId, const char *secret, growthpush::G
 {
     CCAssert(secret, "secret should not be NULL");
     
-    setNotificationCallback();
-    [GrowthPushInternal setApplicationId:applicationId
-                                  secret:[NSString stringWithUTF8String:secret]
-                             environment:environment
-                                   debug:debug];
+    setRemoteNotificationCallback();
+    [GrowthPushCCInternal setApplicationId:applicationId
+                                    secret:[NSString stringWithUTF8String:secret]
+                               environment:environment
+                                     debug:debug];
 }
 
 void GrowthPush::registerDeviceToken(void)
 {
-    [GrowthPushInternal requestDeviceToken];
+    [GrowthPushCCInternal requestDeviceToken];
 }
 
 void GrowthPush::registerDeviceToken(const char *senderId)
@@ -49,7 +49,7 @@ void GrowthPush::trackEvent(const char *name)
 {
     CCAssert(name, "name should not be NULL");
     
-    [GrowthPushInternal trackEvent:[NSString stringWithUTF8String:name]];
+    [GrowthPushCCInternal trackEvent:[NSString stringWithUTF8String:name]];
 }
 
 void GrowthPush::trackEvent(const char *name, const char *value)
@@ -57,15 +57,15 @@ void GrowthPush::trackEvent(const char *name, const char *value)
     CCAssert(name, "name should not be  NULL");
     CCAssert(value, "value should not be  NULL");
     
-    [GrowthPushInternal trackEvent:[NSString stringWithUTF8String:name]
-                             value:[NSString stringWithUTF8String:value]];
+    [GrowthPushCCInternal trackEvent:[NSString stringWithUTF8String:name]
+                               value:[NSString stringWithUTF8String:value]];
 }
 
 void GrowthPush::setTag(const char *name)
 {
     CCAssert(name, "name should not be  NULL");
     
-    [GrowthPushInternal setTag:[NSString stringWithUTF8String:name]];
+    [GrowthPushCCInternal setTag:[NSString stringWithUTF8String:name]];
 }
 
 void GrowthPush::setTag(const char *name, const char *value)
@@ -73,28 +73,25 @@ void GrowthPush::setTag(const char *name, const char *value)
     CCAssert(name, "name should not be  NULL");
     CCAssert(value, "value should not be  NULL");
     
-    [GrowthPushInternal setTag:[NSString stringWithUTF8String:name]
-                         value:[NSString stringWithUTF8String:value]];
+    [GrowthPushCCInternal setTag:[NSString stringWithUTF8String:name]
+                           value:[NSString stringWithUTF8String:value]];
 }
 
 void GrowthPush::setDeviceTags(void)
 {
-    [GrowthPushInternal setDeviceTags];
+    [GrowthPushCCInternal setDeviceTags];
 }
 
 void GrowthPush::clearBadge(void)
 {
-    [GrowthPushInternal clearBadge];
+    [GrowthPushCCInternal clearBadge];
 }
 
-void GrowthPush::setNotificationCallback(void)
+void GrowthPush::setRemoteNotificationCallback(void)
 {
-    [GrowthPushInternal setDidReceivedNotificationBlock:^(NSString *json) {
-        CCLOG("************************");
-        CCLOG("DidReceivedNotification");
-        CCLOG("************************");
+    [GrowthPushCCInternal setDidReceivedNotificationBlock:^(NSString *json) {
         CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceivedNotification, jsonObject);
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceiveRemoteNotification, jsonObject);
     }];
 }
 
