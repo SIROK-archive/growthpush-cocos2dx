@@ -8,9 +8,12 @@
 
 #include "GrowthPush.h"
 
+#include "GPJsonHelper.h"
 #include "GrowthPushInternal.h"
 
 USING_NS_GROWTHPUSH;
+
+const char *growthpush::kGPDidReceivedNotification = "GPDidReceivedNotification";
 
 GrowthPush::GrowthPush(void)
 {
@@ -24,6 +27,7 @@ void GrowthPush::initialize(int applicationId, const char *secret, growthpush::G
 {
     CCAssert(secret, "secret should not be NULL");
     
+    setNotificationCallback();
     [GrowthPushInternal setApplicationId:applicationId
                                   secret:[NSString stringWithUTF8String:secret]
                              environment:environment
@@ -82,3 +86,15 @@ void GrowthPush::clearBadge(void)
 {
     [GrowthPushInternal clearBadge];
 }
+
+void GrowthPush::setNotificationCallback(void)
+{
+    [GrowthPushInternal setDidReceivedNotificationBlock:^(NSString *json) {
+        CCLOG("************************");
+        CCLOG("DidReceivedNotification");
+        CCLOG("************************");
+        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceivedNotification, jsonObject);
+    }];
+}
+

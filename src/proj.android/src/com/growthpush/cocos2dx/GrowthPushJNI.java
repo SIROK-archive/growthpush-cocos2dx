@@ -49,6 +49,16 @@ public class GrowthPushJNI {
         GrowthPush.getInstance().setDeviceTags();
     }
 
+    static void setReceiveHandler() {
+        GrowthPush.getInstance().setReceiveHandler(new ReceiveHandler {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("GrowthPushJNI", "*********onReceive:");
+                Log.d("GrowthPushJNI", "*********onReceive:" + intent.getStringExtra("message"));
+            }
+        });
+    }
+
     /*
      * Convert GPEnvironment to Environment
      * 

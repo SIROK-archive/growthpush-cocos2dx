@@ -16,9 +16,13 @@
 
 NS_GROWTHPUSH_BEGIN
 
+/* APNS/GCM did received notification */
+extern const char *kGPDidReceivedNotification;
+
 class CC_DLL GrowthPush
 {
 public:
+    
     /**
      * Initialize GrowthPush instance and register the client device if not yet been registered
      *
@@ -84,6 +88,8 @@ public:
 private:
     GrowthPush(void);
     virtual ~GrowthPush(void);
+    
+    static void setNotificationCallback(void);
 };
 
 NS_GROWTHPUSH_END

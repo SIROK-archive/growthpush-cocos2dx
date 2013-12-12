@@ -10,7 +10,10 @@
 
 @interface UIApplication (GrowthPushPluginInterface)
 
+- (BOOL)application:(UIApplication *)application gp_didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
 - (void)application:(UIApplication *)application gp_didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken;
 - (void)application:(UIApplication *)application gp_didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
+- (void)application:(UIApplication *)application gp_didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @end
