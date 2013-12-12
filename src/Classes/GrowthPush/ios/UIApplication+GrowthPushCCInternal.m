@@ -62,39 +62,38 @@ void swizze(Class cls, SEL oldSelector, SEL newSelector, IMP imp)
 
 BOOL gp_didFinishLaunchingWithOptionsRuntime(id self, SEL aSel, id application, id launchOptions)
 {
-    [GrowthPushCCInternal didFinishLaunchingWithOptions:launchOptions];
-    
+    BOOL result = TRUE;
     if ([self respondsToSelector:@selector(application:gp_didFinishLaunchingWithOptions:)]) {
-		return [self application:application gp_didFinishLaunchingWithOptions:launchOptions];
+		result = [self application:application gp_didFinishLaunchingWithOptions:launchOptions];
 	}
-    return YES;
+    if (result) {
+        result = [GrowthPushCCInternal didFinishLaunchingWithOptions:launchOptions];
+    }
+    return result;
 }
 
 void gp_didReceiveRemoteNotificationRuntime(id self, SEL aSel, id application, id userInfo)
 {
-    [GrowthPushCCInternal didReceiveRemoteNotification:userInfo];
-    
     if ([self respondsToSelector:@selector(application:gp_didReceiveRemoteNotification:)]) {
 		return [self application:application gp_didReceiveRemoteNotification:userInfo];
 	}
+    [GrowthPushCCInternal didReceiveRemoteNotification:userInfo];
 }
 
 void gp_didRegisterForRemoteNotificationsWithDeviceTokenRuntime(id self, SEL aSel, id application, id deviceToken)
 {
-    [GrowthPushCCInternal didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-    
     if ([self respondsToSelector:@selector(application:gp_didRegisterForRemoteNotificationsWithDeviceToken:)]) {
         [self application:application gp_didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
     }
+    [GrowthPushCCInternal didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 void gp_didFailToRegisterForRemoteNotificationsWithErrorRuntime(id self, SEL aSel, id application, id error)
 {
-    [GrowthPushCCInternal didFailToRegisterForRemoteNotificationsWithError:error];
-    
     if ([self respondsToSelector:@selector(application:gp_didFailToRegisterForRemoteNotificationsWithError:)]) {
         [self application:application gp_didFailToRegisterForRemoteNotificationsWithError:error];
     }
+    [GrowthPushCCInternal didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 @end

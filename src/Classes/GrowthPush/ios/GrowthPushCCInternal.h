@@ -27,7 +27,7 @@ typedef void (^GPDidReceiveRemoteNotificationCompletion)(NSString *jsonString);
 
 + (void)setDidReceivedNotificationBlock:(GPDidReceiveRemoteNotificationCompletion)block;
 
-+ (void)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
++ (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;

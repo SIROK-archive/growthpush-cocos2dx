@@ -85,12 +85,13 @@ static GPDidReceiveRemoteNotificationCompletion s_didReceiveRemoteNotificationBl
     s_didReceiveRemoteNotificationBlock = Block_copy(block);
 }
 
-+ (void)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
++ (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
         [self didReceiveRemoteNotification:userInfo];
     }
+    return YES;
 }
 
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

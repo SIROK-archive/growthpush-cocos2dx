@@ -68,15 +68,17 @@ GrowthPush::clearBadge();
 Example
 
 ```
-void HelloWorld::onEnter() {
-    CCLayer::onEnter();
+void HelloWorld::init() {
+    ... (code) ...
+    
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(HelloWorld::didReceiveRemoteNotification),
                                                                   kGPDidReceiveRemoteNotification, NULL);
+
+    ... (code) ...
 }
 
-void HelloWorld::onExit() {
+void HelloWorld::~HelloWorld() {
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, kGPDidReceiveRemoteNotification);
-    CCLayer::onExit();
 }
 
 void HelloWorld::didReceiveRemoteNotification(CCObject *sender)
