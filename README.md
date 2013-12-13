@@ -24,7 +24,7 @@ Android
 4. Add build path to your project's Android.mk
       * LOCAL_SRC_FILES := ../../Classes/GrowthPush/android/GrowthPush.cpp
       * LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes/GrowthPush
-5. Add GrowthPushJNI class to your project Activity class file
+5. Add "GrowthPushJNI" class to your project Activity class file
 
 Example
 
@@ -32,13 +32,22 @@ Example
 import com.growthpush.cocos2dx.GrowthPushJNI;
 
 public class GrowthPushCocos2dxPlugin extends Cocos2dxActivity {
+    // Add GrowthPushJNI instance
     GrowthPushJNI growthPushJNI = null;
+    
+    protected void onCreate(Bundle savedInstanceState){
+        Log.d("GrowthPushCocos2dxPlugin", "onCreate");
+		super.onCreate(savedInstanceState);
+    }
     
     public Cocos2dxGLSurfaceView onCreateView() {
     	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
     	// GrowthPushCocos2dxPlugin should create stencil buffer
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
+    	
+    	// Use GrowthPushJNI
         growthPushJNI = new GrowthPushJNI(this, glSurfaceView);
+        
     	return glSurfaceView;
     }
 }
