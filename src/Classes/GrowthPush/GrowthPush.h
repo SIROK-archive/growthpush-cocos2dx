@@ -17,7 +17,7 @@
 NS_GROWTHPUSH_BEGIN
 
 /* APNS/GCM did received notification */
-extern const char *kGPDidReceiveRemoteNotification;
+static const char *const kGPDidReceiveRemoteNotification = "GPDidReceiveRemoteNotification";
 
 class CC_DLL GrowthPush
 {
@@ -88,8 +88,6 @@ public:
 private:
     GrowthPush(void);
     virtual ~GrowthPush(void);
-    
-    static void setRemoteNotificationCallback(void);
 };
 
 NS_GROWTHPUSH_END

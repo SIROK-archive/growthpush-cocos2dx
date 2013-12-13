@@ -13,7 +13,13 @@
 
 USING_NS_GROWTHPUSH;
 
-const char *growthpush::kGPDidReceiveRemoteNotification = "GPDidReceiveRemoteNotification";
+void setRemoteNotificationCallback(void)
+{
+    [GrowthPushCCInternal setDidReceivedNotificationBlock:^(NSString *json) {
+        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceiveRemoteNotification, jsonObject);
+    }];
+}
 
 GrowthPush::GrowthPush(void)
 {
@@ -27,11 +33,11 @@ void GrowthPush::initialize(int applicationId, const char *secret, growthpush::G
 {
     CCAssert(secret, "secret should not be NULL");
     
-    setRemoteNotificationCallback();
     [GrowthPushCCInternal setApplicationId:applicationId
                                     secret:[NSString stringWithUTF8String:secret]
                                environment:environment
                                      debug:debug];
+    setRemoteNotificationCallback();
 }
 
 void GrowthPush::registerDeviceToken(void)
@@ -86,12 +92,3 @@ void GrowthPush::clearBadge(void)
 {
     [GrowthPushCCInternal clearBadge];
 }
-
-void GrowthPush::setRemoteNotificationCallback(void)
-{
-    [GrowthPushCCInternal setDidReceivedNotificationBlock:^(NSString *json) {
-        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceiveRemoteNotification, jsonObject);
-    }];
-}
-

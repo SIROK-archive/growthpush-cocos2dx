@@ -34,9 +34,12 @@ import com.growthpush.cocos2dx.GrowthPushJNI;
 public class GrowthPushCocos2dxPlugin extends Cocos2dxActivity {
     GrowthPushJNI growthPushJNI = null;
     
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        growthPushJNI = new GrowthPushJNI(this);
+    public Cocos2dxGLSurfaceView onCreateView() {
+    	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
+    	// GrowthPushCocos2dxPlugin should create stencil buffer
+    	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
+        growthPushJNI = new GrowthPushJNI(this, glSurfaceView);
+    	return glSurfaceView;
     }
 }
 ```
@@ -71,6 +74,7 @@ Example
 void HelloWorld::init() {
     ... (code) ...
     
+    // add remote notification receiver
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(HelloWorld::didReceiveRemoteNotification),
                                                                   kGPDidReceiveRemoteNotification, NULL);
 
@@ -78,6 +82,7 @@ void HelloWorld::init() {
 }
 
 void HelloWorld::~HelloWorld() {
+    // remove remote notification receiver
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, kGPDidReceiveRemoteNotification);
 }
 
@@ -95,4 +100,3 @@ void HelloWorld::didReceiveRemoteNotification(CCObject *sender)
 }
 
 ```
-

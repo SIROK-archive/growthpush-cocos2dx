@@ -1,6 +1,6 @@
 //
 //  GrowthPush.cpp
-//  GrowthPushPlugin
+//  growthpush-cocos2dx
 //
 //  Created by TSURUDA Ryo on 2013/12/08.
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
@@ -8,14 +8,27 @@
 
 #include "GrowthPush.h"
 
+#include <string>
+#include <jni.h>
+
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
-#include <jni.h>
+
+#include "GPJsonHelper.h"
 
 USING_NS_CC;
 USING_NS_GROWTHPUSH;
 
-const char *JavaClassName = "com/growthpush/cocos2dx/GrowthPushJNI";
+static const char *const JavaClassName = "com/growthpush/cocos2dx/GrowthPushJNI";
+
+extern "C" {
+    JNIEXPORT void JNICALL Java_com_growthpush_cocos2dx_GrowthPushJNI_didReceiveRemoteNotification(JNIEnv *env, jobject thiz, jstring jJson)
+    {
+        std::string json = JniHelper::jstring2string(jJson);
+        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject(json.c_str());
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceiveRemoteNotification, jsonObject);
+    }
+}
 
 GrowthPush::GrowthPush(void)
 {

@@ -1,28 +1,74 @@
 package com.growthpush.cocos2dx;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.growthpush.GrowthPush;
+import com.growthpush.handler.ReceiveHandler;
 import com.growthpush.model.Environment;
 
 public class GrowthPushJNI {
     private static Context mContext = null;
+    private static Cocos2dxGLSurfaceView mGLSurfaceView = null; 
 
-    public GrowthPushJNI(Activity activity) {
+    public GrowthPushJNI(Activity activity, Cocos2dxGLSurfaceView glSurfaceView) {
         mContext = activity.getApplicationContext();
+        mGLSurfaceView = glSurfaceView;
     }
 
-    public static void initialize(int applicationId, final String secret) {
-        GrowthPush.getInstance().initialize(mContext, applicationId, secret);
+    // XXX: Test copy from Unity SDK
+    private static JSONObject parsePushGrowthPushMessage(final Intent intent) {
+        if(intent == null) {
+            return null;
+        }
+        Bundle bundle = intent.getExtras();
+        if (bundle == null || bundle.isEmpty()) {
+            return null;
+        }
+        
+        Map<String, Object> jsonMap = new HashMap<String, Object>();
+        for (String key : bundle.keySet()) {
+            String value = bundle.get(key).toString();
+            Log.d("cocos2d-x", key + " => " + value);                                        
+            if (key.equals("showDialog") || key.equals("collapse_key") || key.equals("from")) {
+                continue;
+            }
+            jsonMap.put(key, value);
+        }
+        return new JSONObject(jsonMap);
     }
-
-    public static void initialize(int applicationId, final String secret, int environment) {
-        GrowthPush.getInstance().initialize(mContext, applicationId, secret, environmentFromCocos(environment));
+    
+    private static void setReceiveHandler() {
+        GrowthPush.getInstance().setReceiveHandler(new ReceiveHandler() {
+            @Override
+            public void onReceive(Context context, final Intent intent) {
+                mGLSurfaceView.queueEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("GrowthPushJNI", "*********onReceive:" + intent.getStringExtra("message"));
+                        //JSONObject json = parsePushGrowthPushMessage(intent);
+                        //Log.d("GrowthPushJNI", "*********onReceive json=" + json.toString());
+                        didReceiveRemoteNotification("{\"growthpush\":{\"notificationId\":2778}}");
+                    }
+                });
+            }
+        });
     }
+    
+    private static native void didReceiveRemoteNotification(String json);
 
     public static void initialize(int applicationId, final String secret, int environment, boolean debug) {
         GrowthPush.getInstance().initialize(mContext, applicationId, secret, environmentFromCocos(environment), debug);
+        setReceiveHandler();
     }
 
     public static void register(final String senderId) {
@@ -47,16 +93,6 @@ public class GrowthPushJNI {
 
     public static void setDeviceTags() {
         GrowthPush.getInstance().setDeviceTags();
-    }
-
-    static void setReceiveHandler() {
-        GrowthPush.getInstance().setReceiveHandler(new ReceiveHandler {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.d("GrowthPushJNI", "*********onReceive:");
-                Log.d("GrowthPushJNI", "*********onReceive:" + intent.getStringExtra("message"));
-            }
-        });
     }
 
     /*
