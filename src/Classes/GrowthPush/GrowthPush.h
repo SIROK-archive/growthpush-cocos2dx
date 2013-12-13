@@ -16,7 +16,7 @@
 
 NS_GROWTHPUSH_BEGIN
 
-/* APNS/GCM did received notification */
+/* APNS/GCM did receive notification */
 static const char *const kGPDidReceiveRemoteNotification = "GPDidReceiveRemoteNotification";
 
 class CC_DLL GrowthPush

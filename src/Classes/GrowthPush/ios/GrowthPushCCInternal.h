@@ -11,8 +11,6 @@
 #import <GrowthPush/EGPOption.h>
 #import <GrowthPush/GPEnvironment.h>
 
-typedef void (^GPDidReceiveRemoteNotificationCompletion)(NSString *jsonString);
-
 @interface GrowthPushCCInternal : NSObject
 
 + (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(GPEnvironment)environment debug:(BOOL)debug;
@@ -25,7 +23,7 @@ typedef void (^GPDidReceiveRemoteNotificationCompletion)(NSString *jsonString);
 + (void)setDeviceTags;
 + (void)clearBadge;
 
-+ (void)setDidReceivedNotificationBlock:(GPDidReceiveRemoteNotificationCompletion)block;
++ (void)setDidReceiveNotificationBlock:(void (^)(NSString *json))block;
 
 + (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;

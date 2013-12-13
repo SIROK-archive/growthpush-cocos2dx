@@ -12,8 +12,8 @@
 
 #import "UIApplication+GrowthPushCCInternal.h"
 
-static GPDidReceiveRemoteNotificationCompletion s_didReceiveRemoteNotificationBlock = NULL;
-
+static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
+                                                      
 @implementation GrowthPushCCInternal
 
 - (void)dealloc
@@ -77,13 +77,16 @@ static GPDidReceiveRemoteNotificationCompletion s_didReceiveRemoteNotificationBl
     [GrowthPush clearBadge];
 }
 
-+ (void)setDidReceivedNotificationBlock:(GPDidReceiveRemoteNotificationCompletion)block
++ (void)setDidReceiveNotificationBlock:(void (^)(NSString *json))block
 {
     if (s_didReceiveRemoteNotificationBlock) {
         Block_release(s_didReceiveRemoteNotificationBlock);
     }
     s_didReceiveRemoteNotificationBlock = Block_copy(block);
 }
+
+#pragma mark -
+#pragma UIApplicationDelegate hook methods
 
 + (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

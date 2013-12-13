@@ -13,9 +13,12 @@
 
 USING_NS_GROWTHPUSH;
 
+/*
+ Callback from APNs
+ */
 void setRemoteNotificationCallback(void)
 {
-    [GrowthPushCCInternal setDidReceivedNotificationBlock:^(NSString *json) {
+    [GrowthPushCCInternal setDidReceiveNotificationBlock:^(NSString *json) {
         CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
         CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceiveRemoteNotification, jsonObject);
     }];

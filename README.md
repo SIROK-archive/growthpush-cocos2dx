@@ -5,11 +5,14 @@ Growth Push SDK for Cocos2d-x
 
 Install
 ----------------
+Common
+----------------
+1. Copy "src/Classes/GrowthPush" and "src/Classes/picojson.h" to "/path/to/your_project/Classes/"
+
 iOS
 ----------------
 1. Copy "GrowthPush.framework" library to "/path/to/your_project/proj.ios/Frameworks/"
-2. Copy "src/Classes/GrowthPush" directory to "/path/to/your_project/Classes/"
-3. Add "Security.framework" library to your Xcode project
+2. Add "Security.framework" library to your Xcode project
 
 Android
 ----------------
