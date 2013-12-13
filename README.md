@@ -13,6 +13,7 @@ iOS
 ----------------
 1. Copy "GrowthPush.framework" library to "/path/to/your_project/proj.ios/Frameworks/"
 2. Add "Security.framework" library to your Xcode project
+3. Add "/path/to/your_project/Classes/GrowthPush" and "/path/to/your_project/Classes/picojson.h" to Xcode
 
 Android
 ----------------
