@@ -28,32 +28,75 @@ Android
 4. Add build path to your project's Android.mk
       * LOCAL_SRC_FILES := ../../Classes/GrowthPush/android/GrowthPush.cpp
       * LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes/GrowthPush
-5. Add "GrowthPushJNI" class to your project Activity class file
+5. Modified "Cocos2dxActivity" to "GPCocos2dxActivity" in your project MainActivity class
 
 Example
 
-```
-import com.growthpush.cocos2dx.GrowthPushJNI;
+AndroidManifest.xml
 
-public class GrowthPushCocos2dxPlugin extends Cocos2dxActivity {
-    // Add GrowthPushJNI instance
-    GrowthPushJNI growthPushJNI = null;
-    
+```
+    <application android:label="@string/app_name"
+        android:icon="@drawable/icon">
+
+        <activity android:name="jp.example.sample.SampleActivity"
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:configChanges="orientation"
+                  android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="com.growthpush.view.AlertActivity"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:launchMode="singleInstance"
+                  android:theme="@android:style/Theme.Translucent" />
+        <receiver android:name="com.growthpush.cocos2dx.GPCocos2dxBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+                <intent-filter>
+                        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                        <category android:name="jp.example.sample" />
+                </intent-filter>
+        </receiver>
+        </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <permission android:name="jp.example.sample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="jp.example.sample.permission.C2D_MESSAGE" />
+```
+
+SampleActivity.java
+
+```
+import com.growthpush.cocos2dx.GPCocos2dxActivity;
+
+public class SampleActivity extends GPCocos2dxActivity {
+
     protected void onCreate(Bundle savedInstanceState){
-        Log.d("GrowthPushCocos2dxPlugin", "onCreate");
 		super.onCreate(savedInstanceState);
     }
-    
+
     public Cocos2dxGLSurfaceView onCreateView() {
+        Log.d("GrowthPushCocos2dxPlugin", "onCreateView");
+        
     	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
     	// GrowthPushCocos2dxPlugin should create stencil buffer
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
-    	
-    	// Use GrowthPushJNI
-        growthPushJNI = new GrowthPushJNI(this, glSurfaceView);
         
     	return glSurfaceView;
     }
+
+    static {
+        System.loadLibrary("cocos2dcpp");
+    }     
 }
 ```
 
