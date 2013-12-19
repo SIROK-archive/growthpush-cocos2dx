@@ -9,15 +9,16 @@
 #ifndef GROWTHPUSHPLUGIN_GROWTHPUSH_H_
 #define GROWTHPUSHPLUGIN_GROWTHPUSH_H_
 
-#include "ccMacros.h"  // for CC_DLL
+#include "cocos2d.h"
 
 #include "GPEnvironment.h"
 #include "EGPOption.h"
 
 NS_GROWTHPUSH_BEGIN
 
-/* APNS/GCM did receive notification */
-static const char *const kGPDidReceiveRemoteNotification = "GPDidReceiveRemoteNotification";
+/* APNS/GCM did receive callback function */
+#define gp_remote_notification_selector(_SELECTOR) (GPRemoteNotificationCallFunc)(&_SELECTOR)
+typedef void (cocos2d::CCApplication::*GPRemoteNotificationCallFunc)(cocos2d::CCObject *);
 
 class CC_DLL GrowthPush
 {
@@ -33,6 +34,17 @@ public:
      */
     static void initialize(int applicationId, const char *secret, GPEnvironment environment, bool debug);
     
+    /**
+     * Initialize GrowthPush instance and register the client device if not yet been registered
+     *
+     * @param applicationId Application ID
+     * @param secret Secret key for application
+     * @param environment Build configuration (debug or release)
+     * @param debug Debug mode
+     * @param option option flags
+     */
+    static void initialize(int applicationId, const char *secret, GPEnvironment environment, bool debug, EGPOption option);
+
     /**
      * Set device token
      */
@@ -84,6 +96,8 @@ public:
      * Clear badge of app icon
      */
     static void clearBadge(void);
+    
+    static void launchWithNotification(cocos2d::CCApplication *target, GPRemoteNotificationCallFunc selector);
     
 private:
     GrowthPush(void);

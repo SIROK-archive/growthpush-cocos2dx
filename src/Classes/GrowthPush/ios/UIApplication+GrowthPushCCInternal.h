@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
+#if (CC_TARGET_OS_IPHONE)
+
 #import <UIKit/UIKit.h>
 
 @interface UIApplication (GrowthPushCCInternalInterface)
@@ -17,3 +19,5 @@
 - (void)application:(UIApplication *)application gp_didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @end
+
+#endif

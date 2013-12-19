@@ -122,31 +122,29 @@ GrowthPush::setTag("TagName");
 GrowthPush::setTag("TagName", "TagValue");
 
 GrowthPush::clearBadge();
+
+GrowthPush::launchWithNotification(this, gp_remote_notification_selector(AppDelegate::CALLBACK_FUNCTION));
 ```
 
 Example
 
 ```
-void HelloWorld::init() {
+bool AppDelegate::applicationDidFinishLaunching() {
     ... (code) ...
     
-    // add remote notification receiver
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(HelloWorld::didReceiveRemoteNotification),
-                                                                  kGPDidReceiveRemoteNotification, NULL);
+    // run
+    pDirector->runWithScene(pScene);
+
+    GrowthPush::launchWithNotification(this, gp_remote_notification_selector(AppDelegate::didReceiveRemoteNotification));
 
     ... (code) ...
 }
 
-void HelloWorld::~HelloWorld() {
-    // remove remote notification receiver
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, kGPDidReceiveRemoteNotification);
-}
-
-void HelloWorld::didReceiveRemoteNotification(CCObject *sender)
+void AppDelegate::didReceiveRemoteNotification(CCObject *json)
 {
     // ex.) {"aps":{"badge":1,"sound":"default","alert":"Message"},"growthpush":{"notificationId":1234}}
-    CCDictionary *json = (CCDictionary *)sender;
-    CCDictionary *growthpush = (CCDictionary *)json->objectForKey("growthpush");
+    CCDictionary *jsonDict = (CCDictionary *)json;
+    CCDictionary *growthpush = (CCDictionary *)jsonDict->objectForKey("growthpush");
     /* use CCDouble */
     CCDouble *notificationID = (CCDouble *)growthpush->objectForKey("notificationId");
     CCLOG("notificationID:%d", notificationID->intValue());

@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
+#if (CC_TARGET_OS_IPHONE)
+
 #import "UIApplication+GrowthPushCCInternal.h"
 
 #import <objc/runtime.h>
@@ -97,3 +99,5 @@ void gp_didFailToRegisterForRemoteNotificationsWithErrorRuntime(id self, SEL aSe
 }
 
 @end
+
+#endif

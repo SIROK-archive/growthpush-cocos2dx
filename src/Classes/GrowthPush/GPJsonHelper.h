@@ -18,8 +18,6 @@
 #define GP_CAN_USE_BOOL_DOUBLE_OBJECT 1
 #endif
 
-USING_NS_CC;
-
 class GPJsonHelper
 {
 public:
@@ -30,7 +28,7 @@ public:
      @param json  JSON string
      @return CCObject* object
      */
-    static CCObject *parseJson2CCObject(const char *json)
+    static cocos2d::CCObject *parseJson2CCObject(const char *json)
     {
         picojson::value v;
         std::string error;
@@ -50,9 +48,9 @@ public:
      @param json  JSON string
      @return CCDictionary* object
      */
-    static CCDictionary *parseJson2CCDictionary(const char *json)
+    static cocos2d::CCDictionary *parseJson2CCDictionary(const char *json)
     {
-        return (CCDictionary *)parseJson2CCObject(json);
+        return (cocos2d::CCDictionary *)parseJson2CCObject(json);
     }
     
     /**
@@ -61,9 +59,9 @@ public:
      @param json  JSON string
      @return CCArray* object
      */
-    static CCArray *parseJson2CCArray(const char *json)
+    static cocos2d::CCArray *parseJson2CCArray(const char *json)
     {
-        return (CCArray *)parseJson2CCObject(json);
+        return (cocos2d::CCArray *)parseJson2CCObject(json);
     }
     
     /**
@@ -72,9 +70,9 @@ public:
      @param json  JSON string
      @return CCString* object
      */
-    static CCString *parseJson2CCString(const char *json)
+    static cocos2d::CCString *parseJson2CCString(const char *json)
     {
-        return (CCString *)parseJson2CCObject(json);
+        return (cocos2d::CCString *)parseJson2CCObject(json);
     }
     
 #if GP_CAN_USE_BOOL_DOUBLE_OBJECT
@@ -84,9 +82,9 @@ public:
      @param json  JSON string
      @return CCDouble* object
      */
-    static CCDouble *parseJson2CCDouble(const char *json)
+    static cocos2d::CCDouble *parseJson2CCDouble(const char *json)
     {
-        return (CCDouble *)parseJson2CCObject(json);
+        return (cocos2d::CCDouble *)parseJson2CCObject(json);
     }
     
     /**
@@ -95,9 +93,9 @@ public:
      @param json  JSON string
      @return CCBool* object
      */
-    static CCBool *parseJson2CCBool(const char *json)
+    static cocos2d::CCBool *parseJson2CCBool(const char *json)
     {
-        return (CCBool *)parseJson2CCObject(json);
+        return (cocos2d::CCBool *)parseJson2CCObject(json);
     }
 #endif
     
@@ -109,7 +107,7 @@ private:
      @param v  value of picojson
      @return CCObject* object
      */
-    static CCObject *convertJson2CCObject(picojson::value v)
+    static cocos2d::CCObject *convertJson2CCObject(picojson::value v)
     {
         if (v.is<bool>()) {
             return convertJson2CCBool(v);  // bool
@@ -122,7 +120,7 @@ private:
         } else if (v.is<picojson::object>()) {
             return convertJson2CCDictionary(v);  // object
         } else if (v.is<picojson::null>()) {
-            return new CCObject();  // null
+            return new cocos2d::CCObject();  // null
         }
         
         CCLOGERROR("failed to convert: Unknown object");
@@ -135,15 +133,15 @@ private:
      @param v  value of picojson
      @return CCDictionry* object
      */
-    static CCObject *convertJson2CCDictionary(picojson::value v)
+    static cocos2d::CCObject *convertJson2CCDictionary(picojson::value v)
     {
-        CCDictionary *pDictionary = new CCDictionary();
+        cocos2d::CCDictionary *pDictionary = new cocos2d::CCDictionary();
         if (!pDictionary) {
             return NULL;
         }
         picojson::object obj = v.get<picojson::object>();
         for (picojson::object::iterator it = obj.begin(); it != obj.end(); ++it) {
-            CCObject *pObject = convertJson2CCObject(it->second);
+            cocos2d::CCObject *pObject = convertJson2CCObject(it->second);
             if (!pObject) {
                 CC_SAFE_DELETE(pDictionary);
                 return NULL;
@@ -159,16 +157,16 @@ private:
      @param v  value of picojson
      @return CCArray* object
      */
-    static CCObject *convertJson2CCArray(picojson::value v)
+    static cocos2d::CCObject *convertJson2CCArray(picojson::value v)
     {
-        CCArray *pArray = new CCArray();
+        cocos2d::CCArray *pArray = new cocos2d::CCArray();
         if (!pArray || !pArray->init()) {
             CC_SAFE_DELETE(pArray);
             return NULL;
         }
         picojson::array arr = v.get<picojson::array>();
         for (picojson::array::iterator it = arr.begin(); it != arr.end(); ++it) {
-            CCObject *pObject = convertJson2CCObject(*it);
+            cocos2d::CCObject *pObject = convertJson2CCObject(*it);
             if (!pObject) {
                 CC_SAFE_DELETE(pArray);
                 return NULL;
@@ -184,10 +182,10 @@ private:
      @param v  value of picojson
      @return CCString* object
      */
-    static CCObject *convertJson2CCString(picojson::value v)
+    static cocos2d::CCObject *convertJson2CCString(picojson::value v)
     {
         std::string s = v.get<std::string>();
-        return new CCString(s);
+        return new cocos2d::CCString(s);
     }
     
     /*
@@ -196,13 +194,13 @@ private:
      @param v  value of picojson
      @return CCDouble* or CCString* object
      */
-    static CCObject *convertJson2CCDouble(picojson::value v)
+    static cocos2d::CCObject *convertJson2CCDouble(picojson::value v)
     {
         double d = v.get<double>();
 #if GP_CAN_USE_BOOL_DOUBLE_OBJECT
-        return new CCDouble(d);
+        return new cocos2d::CCDouble(d);
 #else
-        CCString *pString = new CCString();
+        cocos2d::CCString *pString = new cocos2d::CCString();
         if (!pString || !pString->initWithFormat("%lf", d)) {
             CC_SAFE_DELETE(pString);
             return NULL;
@@ -217,13 +215,13 @@ private:
      @param v  value of picojson
      @return CCBool* or CCString* object
      */
-    static CCObject *convertJson2CCBool(picojson::value v)
+    static cocos2d::CCObject *convertJson2CCBool(picojson::value v)
     {
         bool b = v.get<bool>();
 #if GP_CAN_USE_BOOL_DOUBLE_OBJECT
-        return new CCBool(b);
+        return new cocos2d::CCBool(b);
 #else
-        return new CCString(b ? "true" : "false");
+        return new cocos2d::CCString(b ? "true" : "false");
 #endif
     }
 };

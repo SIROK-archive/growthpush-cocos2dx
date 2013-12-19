@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
+#if (CC_TARGET_OS_IPHONE)
+
 #import <Foundation/Foundation.h>
 
 #import <GrowthPush/EGPOption.h>
@@ -31,3 +33,5 @@
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @end
+
+#endif

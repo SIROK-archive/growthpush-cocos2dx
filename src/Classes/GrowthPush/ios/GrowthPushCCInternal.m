@@ -6,6 +6,8 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
+#if (CC_TARGET_OS_IPHONE)
+
 #import "GrowthPushCCInternal.h"
 
 #import <GrowthPush/GrowthPush.h>
@@ -27,7 +29,7 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 
 + (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(GPEnvironment)environment debug:(BOOL)debug
 {
-    [GrowthPush setApplicationId:applicationId
+    [EasyGrowthPush setApplicationId:applicationId
                           secret:secret
                      environment:environment
                            debug:debug];
@@ -125,3 +127,5 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 }
 
 @end
+
+#endif

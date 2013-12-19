@@ -6,23 +6,15 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
+#if (CC_TARGET_OS_IPHONE)
+
 #include "GrowthPush.h"
 
 #include "GPJsonHelper.h"
 #include "GrowthPushCCInternal.h"
 
+USING_NS_CC;
 USING_NS_GROWTHPUSH;
-
-/*
- Callback from APNs
- */
-void setRemoteNotificationCallback(void)
-{
-    [GrowthPushCCInternal setDidReceiveNotificationBlock:^(NSString *json) {
-        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(kGPDidReceiveRemoteNotification, jsonObject);
-    }];
-}
 
 GrowthPush::GrowthPush(void)
 {
@@ -40,7 +32,17 @@ void GrowthPush::initialize(int applicationId, const char *secret, growthpush::G
                                     secret:[NSString stringWithUTF8String:secret]
                                environment:environment
                                      debug:debug];
-    setRemoteNotificationCallback();
+}
+
+void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug, growthpush::EGPOption option)
+{
+    CCAssert(secret, "secret should not be NULL");
+    
+    [GrowthPushCCInternal setApplicationId:applicationId
+                                    secret:[NSString stringWithUTF8String:secret]
+                               environment:environment
+                                     debug:debug
+                                    option:option];
 }
 
 void GrowthPush::registerDeviceToken(void)
@@ -63,8 +65,8 @@ void GrowthPush::trackEvent(const char *name)
 
 void GrowthPush::trackEvent(const char *name, const char *value)
 {
-    CCAssert(name, "name should not be  NULL");
-    CCAssert(value, "value should not be  NULL");
+    CCAssert(name, "name should not be NULL");
+    CCAssert(value, "value should not be NULL");
     
     [GrowthPushCCInternal trackEvent:[NSString stringWithUTF8String:name]
                                value:[NSString stringWithUTF8String:value]];
@@ -72,15 +74,15 @@ void GrowthPush::trackEvent(const char *name, const char *value)
 
 void GrowthPush::setTag(const char *name)
 {
-    CCAssert(name, "name should not be  NULL");
+    CCAssert(name, "name should not be NULL");
     
     [GrowthPushCCInternal setTag:[NSString stringWithUTF8String:name]];
 }
 
 void GrowthPush::setTag(const char *name, const char *value)
 {
-    CCAssert(name, "name should not be  NULL");
-    CCAssert(value, "value should not be  NULL");
+    CCAssert(name, "name should not be NULL");
+    CCAssert(value, "value should not be NULL");
     
     [GrowthPushCCInternal setTag:[NSString stringWithUTF8String:name]
                            value:[NSString stringWithUTF8String:value]];
@@ -95,3 +97,16 @@ void GrowthPush::clearBadge(void)
 {
     [GrowthPushCCInternal clearBadge];
 }
+
+void GrowthPush::launchWithNotification(CCApplication *target, GPRemoteNotificationCallFunc selector)
+{
+    CCAssert(target, "target should not be NULL");
+    CCAssert(selector, "func should not be NULL");
+    
+    [GrowthPushCCInternal setDidReceiveNotificationBlock:^(NSString *json) {
+        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
+        (target->*selector)(jsonObject);
+    }];
+}
+
+#endif
