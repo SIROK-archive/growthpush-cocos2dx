@@ -6,14 +6,13 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#if (CC_TARGET_OS_IPHONE)
+#if defined(CC_TARGET_OS_IPHONE)
 
 #import <UIKit/UIKit.h>
 
 @interface UIApplication (GrowthPushCCInternalInterface)
 
 - (BOOL)application:(UIApplication *)application gp_didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
-
 - (void)application:(UIApplication *)application gp_didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken;
 - (void)application:(UIApplication *)application gp_didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
 - (void)application:(UIApplication *)application gp_didReceiveRemoteNotification:(NSDictionary *)userInfo;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#if (CC_TARGET_OS_IPHONE)
+#if defined(CC_TARGET_OS_IPHONE)
 
 #import "GrowthPushCCInternal.h"
 

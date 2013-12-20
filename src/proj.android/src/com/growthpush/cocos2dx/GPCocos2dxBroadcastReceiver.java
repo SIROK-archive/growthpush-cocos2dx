@@ -6,13 +6,13 @@ import com.growthpush.GrowthPush;
 import android.content.Context;
 import android.content.Intent;
 
-public class GPCocos2dxBroadcastReceiver extends BroadcastReceiver{
+public class GPCocos2dxBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        
         if (GrowthPush.getInstance().getClient() == null) {
-            String str = GPCocos2dxActivity.parseGrowthPushMessage(intent);
-            GPCocos2dxActivity.saveGrowthPushMessage(str);
+            GrowthPushJNI.saveGrowthPushMessage(intent);
         }
     }
 }

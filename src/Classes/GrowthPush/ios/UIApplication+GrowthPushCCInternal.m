@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#if (CC_TARGET_OS_IPHONE)
+#if defined(CC_TARGET_OS_IPHONE)
 
 #import "UIApplication+GrowthPushCCInternal.h"
 
@@ -64,7 +64,7 @@ void swizze(Class cls, SEL oldSelector, SEL newSelector, IMP imp)
 
 BOOL gp_didFinishLaunchingWithOptionsRuntime(id self, SEL aSel, id application, id launchOptions)
 {
-    BOOL result = TRUE;
+    BOOL result = YES;
     if ([self respondsToSelector:@selector(application:gp_didFinishLaunchingWithOptions:)]) {
 		result = [self application:application gp_didFinishLaunchingWithOptions:launchOptions];
 	}
@@ -77,7 +77,7 @@ BOOL gp_didFinishLaunchingWithOptionsRuntime(id self, SEL aSel, id application, 
 void gp_didReceiveRemoteNotificationRuntime(id self, SEL aSel, id application, id userInfo)
 {
     if ([self respondsToSelector:@selector(application:gp_didReceiveRemoteNotification:)]) {
-		return [self application:application gp_didReceiveRemoteNotification:userInfo];
+		[self application:application gp_didReceiveRemoteNotification:userInfo];
 	}
     [GrowthPushCCInternal didReceiveRemoteNotification:userInfo];
 }
