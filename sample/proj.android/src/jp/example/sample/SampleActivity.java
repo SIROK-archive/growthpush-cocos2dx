@@ -4,7 +4,6 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 import com.growthpush.cocos2dx.GPCocos2dxActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 public class SampleActivity extends GPCocos2dxActivity {
     
@@ -13,8 +12,6 @@ public class SampleActivity extends GPCocos2dxActivity {
     }
 
     public Cocos2dxGLSurfaceView onCreateView() {
-        Log.d("GrowthPushCocos2dxPlugin", "onCreateView");
-        
     	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
     	// GrowthPushCocos2dxPlugin should create stencil buffer
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);

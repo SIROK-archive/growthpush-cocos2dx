@@ -7,13 +7,13 @@ Install
 ----------------
 Common
 ----------------
-1. Copy "src/Classes/GrowthPush" and "src/Classes/picojson.h" to "/path/to/your_project/Classes/"
+1. Copy "src/Classes/GrowthPush" to "/path/to/your_project/Classes/"
 
 iOS
 ----------------
 1. Copy "GrowthPush.framework" library to "/path/to/your_project/proj.ios/Frameworks/"
 2. Add "Security.framework" library to your Xcode project
-3. Add "/path/to/your_project/Classes/GrowthPush" and "/path/to/your_project/Classes/picojson.h" to Xcode
+3. Add "/path/to/your_project/Classes/GrowthPush" to Xcode
 
 Android
 ----------------
@@ -85,8 +85,6 @@ public class SampleActivity extends GPCocos2dxActivity {
     }
 
     public Cocos2dxGLSurfaceView onCreateView() {
-        Log.d("GrowthPushCocos2dxPlugin", "onCreateView");
-        
     	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
     	// GrowthPushCocos2dxPlugin should create stencil buffer
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
@@ -135,22 +133,44 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // run
     pDirector->runWithScene(pScene);
 
+    int appID = YOUR_APP_ID;
+    const char *secrect = "YOUR_APP_SECRET";
+    GPEnvironment environment = GPEnvironmentDevelopment;
+    bool debug = true;
+    EGPOption option = EGPOptionAll;
+    const char *senderID = "YOUR_SENDER_ID";
+    
+    GrowthPush::initialize(appID, secrect, environment, debug, option);
+    GrowthPush::registerDeviceToken(senderID);
+    GrowthPush::setDeviceTags();
+    GrowthPush::trackEvent("Event");
+    GrowthPush::trackEvent("Event", "Value");
+    GrowthPush::setTag("Tag");
+    GrowthPush::setTag("Tag", "Value");
+    GrowthPush::clearBadge();
+    
     GrowthPush::launchWithNotification(this, gp_remote_notification_selector(AppDelegate::didReceiveRemoteNotification));
 
     ... (code) ...
 }
 
-void AppDelegate::didReceiveRemoteNotification(CCObject *json)
+void AppDelegate::didReceiveRemoteNotification(CCDictionary *json)
 {
     // ex.) {"aps":{"badge":1,"sound":"default","alert":"Message"},"growthpush":{"notificationId":1234}}
-    CCDictionary *jsonDict = (CCDictionary *)json;
-    CCDictionary *growthpush = (CCDictionary *)jsonDict->objectForKey("growthpush");
-    /* use CCDouble */
-    CCDouble *notificationID = (CCDouble *)growthpush->objectForKey("notificationId");
-    CCLOG("notificationID:%d", notificationID->intValue());
-    /* cannot use CCDouble */
-    CCString *notificationID = (CCString *)growthpush->objectForKey("notificationId");
-    CCLOG("notificationID:%d", (int)notificationID->getValue());
+    CCDictionary *growthpush = (CCDictionary *)json->objectForKey("growthpush");
+    if (growthpush) {
+        CCObject *notificationIDObject = growthpush->objectForKey("notificationId");
+        if (notificationIDObject) {
+#if 0x00020100 <= COCOS2D_VERSION
+            /* use CCDouble */
+            int notificationID = ((CCDouble *)notificationIDObject)->getValue();
+#else
+            /* cannot use CCDouble */
+            int notificationID = ((CCString *)notificationIDObject)->intValue();
+#endif
+            GrowthPush::trackEvent(CCString::createWithFormat("Launch via push notification %d", notificationID));
+        }
+    }
 }
 
 ```
