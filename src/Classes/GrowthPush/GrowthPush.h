@@ -18,7 +18,7 @@ NS_GROWTHPUSH_BEGIN
 
 /* APNS/GCM did receive callback function */
 #define gp_remote_notification_selector(_SELECTOR) (GPRemoteNotificationCallFunc)(&_SELECTOR)
-typedef void (cocos2d::CCApplication::*GPRemoteNotificationCallFunc)(cocos2d::CCObject *);
+typedef void (cocos2d::CCApplication::*GPRemoteNotificationCallFunc)(cocos2d::CCDictionary *);
 
 class CC_DLL GrowthPush
 {
@@ -63,6 +63,11 @@ public:
      * @param name Event name such as "Launch" (max 64 characters)
      */
     static void trackEvent(const char *name);
+    static void trackEvent(cocos2d::CCString *name)
+    {
+        CCAssert(name, "name should not be NULL");
+        trackEvent(name->getCString());
+    }
     
     /**
      * Track event with additional information
@@ -71,6 +76,13 @@ public:
      * @param value Additional information
      */
     static void trackEvent(const char *name, const char *value);
+    static void trackEvent(cocos2d::CCString *name, cocos2d::CCString *value)
+    {
+        CCAssert(name, "name should not be NULL");
+        CCAssert(value, "value should not be NULL");
+        trackEvent(name->getCString(), value->getCString());
+    }
+    
     
     /**
      * Create a tag for the device
@@ -78,6 +90,12 @@ public:
      * @param name Tag name such as "Finished Tutorial" (max 64 characters)
      */
     static void setTag(const char *name);
+    static void setTag(cocos2d::CCString *name)
+    {
+        CCAssert(name, "name should not be NULL");
+        setTag(name->getCString());
+    }
+
     
     /**
      * Create a tag with value for the device
@@ -86,6 +104,12 @@ public:
      * @param value Tag value such as "male"
      */
     static void setTag(const char *name, const char *value);
+    static void setTag(cocos2d::CCString *name, cocos2d::CCString *value)
+    {
+        CCAssert(name, "name should not be NULL");
+        CCAssert(value, "value should not be NULL");
+        setTag(name->getCString());
+    }
     
     /**
      * Create tags including device model, OS version, language, time zone and app version
@@ -97,11 +121,17 @@ public:
      */
     static void clearBadge(void);
     
+    /**
+     * Adds an callback for the specified target.
+     *
+     * @param target The target which wants to observe notification events.
+     * @param selector The callback function which will be invoked when the specified notification event was posted.
+     */
     static void launchWithNotification(cocos2d::CCApplication *target, GPRemoteNotificationCallFunc selector);
     
 private:
     GrowthPush(void);
-    virtual ~GrowthPush(void);
+    ~GrowthPush(void);
 };
 
 NS_GROWTHPUSH_END

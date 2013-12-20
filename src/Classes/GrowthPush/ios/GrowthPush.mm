@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 TSURUDA Ryo. All rights reserved.
 //
 
-#if (CC_TARGET_OS_IPHONE)
+#if defined(CC_TARGET_OS_IPHONE)
 
 #include "GrowthPush.h"
 
@@ -101,11 +101,11 @@ void GrowthPush::clearBadge(void)
 void GrowthPush::launchWithNotification(CCApplication *target, GPRemoteNotificationCallFunc selector)
 {
     CCAssert(target, "target should not be NULL");
-    CCAssert(selector, "func should not be NULL");
+    CCAssert(selector, "selector should not be NULL");
     
     [GrowthPushCCInternal setDidReceiveNotificationBlock:^(NSString *json) {
-        CCObject *jsonObject = GPJsonHelper::parseJson2CCObject([json UTF8String]);
-        (target->*selector)(jsonObject);
+        CCDictionary *jsonDict = GPJsonHelper::parseJson2CCDictionary([json UTF8String]);
+        (target->*selector)(jsonDict);
     }];
 }
 

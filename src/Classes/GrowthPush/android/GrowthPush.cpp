@@ -31,8 +31,8 @@ extern "C" {
     {
         if (s_target != NULL && s_selector != NULL) {
             std::string json = JniHelper::jstring2string(jJson);
-            CCObject *jsonObject = GPJsonHelper::parseJson2CCObject(json.c_str());
-            (s_target->*s_selector)(jsonObject);
+            CCDictionary *jsonDict = GPJsonHelper::parseJson2CCDictionary(json.c_str());
+            (s_target->*s_selector)(jsonDict);
         }
     }
 }
@@ -62,6 +62,7 @@ void GrowthPush::initialize(int applicationId, const char *secret, growthpush::G
 
 void GrowthPush::initialize(int applicationId, const char *secret, GPEnvironment environment, bool debug, EGPOption option)
 {
+    CC_UNUSED_PARAM(option);
     initialize(applicationId, secret, environment, debug);  // ignore "option"
 }
 
@@ -159,7 +160,7 @@ void GrowthPush::clearBadge(void)
 void GrowthPush::launchWithNotification(CCApplication *target, GPRemoteNotificationCallFunc selector)
 {
     CCAssert(target, "target should not be NULL");
-    CCAssert(func, "func should not be NULL");
+    CCAssert(selector, "selector should not be NULL");
 
     s_target = target;
     s_selector = selector;
