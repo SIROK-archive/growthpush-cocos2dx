@@ -15,7 +15,7 @@
 #include "picojson.h"
 
 #if 0x00020100 <= COCOS2D_VERSION
-#define GP_CAN_USE_BOOL_DOUBLE_OBJECT 1
+#define GP_CAN_USE_NUMERIC_OBJECT 1
 #endif
 
 class GPJsonHelper
@@ -75,7 +75,7 @@ public:
         return (cocos2d::CCString *)parseJson2CCObject(json);
     }
     
-#if GP_CAN_USE_BOOL_DOUBLE_OBJECT
+#ifdef GP_CAN_USE_NUMERIC_OBJECT
     /**
      Parse JSON string to CCDouble.
      
@@ -120,7 +120,7 @@ private:
         } else if (v.is<picojson::object>()) {
             return convertJson2CCDictionary(v);  // object
         } else if (v.is<picojson::null>()) {
-            return new cocos2d::CCObject();  // null
+            return convertJson2Null(v);  // null
         }
         
         CCLOGERROR("failed to convert: Unknown object");
@@ -197,7 +197,7 @@ private:
     static cocos2d::CCObject *convertJson2CCDouble(picojson::value v)
     {
         double d = v.get<double>();
-#if GP_CAN_USE_BOOL_DOUBLE_OBJECT
+#ifdef GP_CAN_USE_NUMERIC_OBJECT
         return new cocos2d::CCDouble(d);
 #else
         cocos2d::CCString *pString = new cocos2d::CCString();
@@ -218,11 +218,23 @@ private:
     static cocos2d::CCObject *convertJson2CCBool(picojson::value v)
     {
         bool b = v.get<bool>();
-#if GP_CAN_USE_BOOL_DOUBLE_OBJECT
+#ifdef GP_CAN_USE_NUMERIC_OBJECT
         return new cocos2d::CCBool(b);
 #else
         return new cocos2d::CCString(b ? "true" : "false");
 #endif
+    }
+    
+    /*
+     Convert type picojson::value to CCObject. (Because cannot use CCNull Object.)
+     
+     @param v  value of picojson
+     @return CCObject* object
+     */
+    static cocos2d::CCObject *convertJson2Null(picojson::value v)
+    {
+        CC_UNUSED_PARAM(v);  // ignore value
+        return new cocos2d::CCObject();
     }
 };
 
