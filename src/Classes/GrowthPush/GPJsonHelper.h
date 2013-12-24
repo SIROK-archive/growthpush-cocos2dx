@@ -50,7 +50,7 @@ public:
      */
     static cocos2d::CCDictionary *parseJson2CCDictionary(const char *json)
     {
-        return (cocos2d::CCDictionary *)parseJson2CCObject(json);
+        return dynamic_cast<cocos2d::CCDictionary *>(parseJson2CCObject(json));
     }
     
     /**
@@ -61,7 +61,7 @@ public:
      */
     static cocos2d::CCArray *parseJson2CCArray(const char *json)
     {
-        return (cocos2d::CCArray *)parseJson2CCObject(json);
+        return dynamic_cast<cocos2d::CCArray *>(parseJson2CCObject(json));
     }
     
     /**
@@ -72,7 +72,7 @@ public:
      */
     static cocos2d::CCString *parseJson2CCString(const char *json)
     {
-        return (cocos2d::CCString *)parseJson2CCObject(json);
+        return dynamic_cast<cocos2d::CCString *>(parseJson2CCObject(json));
     }
     
 #ifdef GP_CAN_USE_NUMERIC_OBJECT
@@ -84,7 +84,7 @@ public:
      */
     static cocos2d::CCDouble *parseJson2CCDouble(const char *json)
     {
-        return (cocos2d::CCDouble *)parseJson2CCObject(json);
+        return dynamic_cast<cocos2d::CCDouble *>(parseJson2CCObject(json));
     }
     
     /**
@@ -95,7 +95,7 @@ public:
      */
     static cocos2d::CCBool *parseJson2CCBool(const char *json)
     {
-        return (cocos2d::CCBool *)parseJson2CCObject(json);
+        return dynamic_cast<cocos2d::CCBool *>(parseJson2CCObject(json));
     }
 #endif
     

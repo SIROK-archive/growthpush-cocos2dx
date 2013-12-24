@@ -108,8 +108,8 @@ USING_NS_GROWTHPUSH;
 
 GrowthPush::initialize(YOUR_APP_ID, "YOUR_APP_SECRET", YOUR_APP_ENV, YOUR_DEBUG_FLAG);
 
-GrowthPush::registerDeviceToken();
-GrowthPush::registerDeviceToken("YOUR_SENDER_ID");
+GrowthPush::registerDeviceToken();  // iOS only
+GrowthPush::registerDeviceToken("YOUR_SENDER_ID");  // if you need Android
 
 GrowthPush::setDeviceTags();
 
