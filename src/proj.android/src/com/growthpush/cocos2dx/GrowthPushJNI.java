@@ -10,12 +10,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.growthpush.GrowthPush;
-import com.growthpush.model.Environment;
 
 public class GrowthPushJNI {
     static final String LOG_TAG = "growthpush-cocos2dx";
     static Context mContext = null;
-    static String growthPushMessage = null;
+    static String mGrowthPushMessage = null;
+    static int mOption = OptionJNI.all;
 
     public GrowthPushJNI(Context context) {
         mContext = context;
@@ -23,13 +23,22 @@ public class GrowthPushJNI {
 
     public static void saveGrowthPushMessage(Intent intent) {
         String msg = parseGrowthPushMessage(intent);
-        growthPushMessage = msg;
+        mGrowthPushMessage = msg;
     }
     
     public static void callTrackGrowthPushMessage() {
-        if (growthPushMessage != null) {
-            didReceiveRemoteNotificationOnGLSurfaceView(growthPushMessage);
-            growthPushMessage = null;
+        if (mGrowthPushMessage != null) {
+            didReceiveRemoteNotificationOnGLSurfaceView(mGrowthPushMessage);
+            mGrowthPushMessage = null;
+        }
+    }
+    
+    /*
+     * Send "Launch" event.
+     */
+    public static void sendLaunchEvent() {
+        if ((mOption & OptionJNI.trackLaunch) == OptionJNI.trackLaunch) {
+            trackEvent("Launch");
         }
     }
 
@@ -82,9 +91,14 @@ public class GrowthPushJNI {
     static native void didReceiveRemoteNotification(String json);
 
     public static void initialize(int applicationId, final String secret, int environment, boolean debug) {
-        GrowthPush.getInstance().initialize(mContext, applicationId, secret, environmentFromCocos(environment), debug);
+        GrowthPush.getInstance().initialize(mContext, applicationId, secret, EnvironmentJNI.environmentFromCocos(environment), debug);
     }
 
+    public static void initialize(int applicationId, final String secret, int environment, boolean debug, int option) {
+        mOption = option;
+        initialize(applicationId, secret, environment, debug);
+    }
+    
     public static void register(final String senderId) {
         GrowthPush.getInstance().register(senderId);
     }
@@ -107,20 +121,5 @@ public class GrowthPushJNI {
 
     public static void setDeviceTags() {
         GrowthPush.getInstance().setDeviceTags();
-    }
-    
-    /*
-     * Convert GPEnvironment to Environment
-     * 
-     * @param environment GPEnvironment value of Cocos2d-x
-     * @return Environment value of Java
-     */
-    private static Environment environmentFromCocos(int environment) {
-        if (environment == Environment.development.ordinal()) {
-            return Environment.development;
-        } else if (environment == Environment.production.ordinal()) {
-            return Environment.production;
-        }
-        throw new IllegalArgumentException("Unknown environment");
     }
 }
