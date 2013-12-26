@@ -107,6 +107,7 @@ Cocos2d-x usage
 USING_NS_GROWTHPUSH;
 
 GrowthPush::initialize(YOUR_APP_ID, "YOUR_APP_SECRET", YOUR_APP_ENV, YOUR_DEBUG_FLAG);
+GrowthPush::initialize(YOUR_APP_ID, "YOUR_APP_SECRET", YOUR_APP_ENV, YOUR_DEBUG_FLAG, YOUR_APP_OPTION);
 
 GrowthPush::registerDeviceToken();  // iOS only
 GrowthPush::registerDeviceToken("YOUR_SENDER_ID");  // if you need Android
