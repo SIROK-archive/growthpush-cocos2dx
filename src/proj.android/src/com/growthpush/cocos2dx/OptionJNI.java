@@ -1,7 +1,7 @@
 package com.growthpush.cocos2dx;
 
 public class OptionJNI {
-    public static final int none = 1 << 0;
+    public static final int none = 0;
     public static final int trackLaunch = 1 << 0;
     public static final int tagDevie = 1 << 1;
     public static final int tagOS = 1 << 2;
