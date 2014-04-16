@@ -9,13 +9,13 @@ Common
 ----------------
 1. Copy "src/Classes/GrowthPush" to "/path/to/your_project/Classes/"
 
-iOS
+iOS　→　(http://blog.growthpush.com/post/71159185584/ios-cocos2d-x)
 ----------------
 1. Copy "GrowthPush.framework" library to "/path/to/your_project/proj.ios/Frameworks/"
 2. Add "Security.framework" library to your Xcode project
 3. Add "/path/to/your_project/Classes/GrowthPush" to Xcode
 
-Android
+Android　→　(http://blog.growthpush.com/post/74729590395/android-cocos2d-x)
 ----------------
 1. Copy following jar files to "/path/to/your_project/proj.android/libs/"
       * android-support-v4.jar
