@@ -62,7 +62,6 @@ GrowthPush::~GrowthPush(void)
 
 void GrowthPush::initialize(int applicationId, const std::string &secret, GPEnvironment environment, bool debug)
 {
-    CCLOG("GrowthPush::initialize:applicationId=%d, secret=%s, environment=%d, debug=%d", applicationId, secret.c_str(), environment, debug);
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, JavaClassName, "initialize", "(ILjava/lang/String;IZ)V")) {
         jstring jSecret = t.env->NewStringUTF(secret.c_str());
@@ -79,8 +78,6 @@ void GrowthPush::registerDeviceToken(void)
 
 void GrowthPush::registerDeviceToken(const std::string &senderId)
 {
-    CCLOG("GrowthPush::registerDeviceToken=%s", senderId.c_str());
-    
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, JavaClassName, "register", "(Ljava/lang/String;)V")) {
         jstring jSenderId = t.env->NewStringUTF(senderId.c_str());
@@ -140,7 +137,6 @@ void GrowthPush::setTag(const std::string &name, const std::string &value)
 
 void GrowthPush::setDeviceTags(void)
 {
-    CCLOG("GrowthPush::setDeviceTags");
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, JavaClassName, "setDeviceTags", "()V")) {
         t.env->CallStaticVoidMethod(t.classID, t.methodID);
