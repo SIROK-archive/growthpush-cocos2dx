@@ -29,6 +29,8 @@ static const char *const JavaClassName = "com/growthpush/cocos2dx/GrowthPushJNI"
 static cocos2d::Application *s_target = nullptr;
 static GPRemoteNotificationCallFunc s_selector = nullptr;
 
+int environmentFrmCocos(GPEnvironment environment);
+
 extern "C" {
     JNIEXPORT void JNICALL Java_com_growthpush_cocos2dx_GrowthPushJNI_didReceiveRemoteNotification(JNIEnv *env, jobject thiz, jstring jJson)
     {
@@ -65,7 +67,7 @@ void GrowthPush::initialize(int applicationId, const std::string &secret, GPEnvi
     JniMethodInfo t;
     if (JniHelper::getStaticMethodInfo(t, JavaClassName, "initialize", "(ILjava/lang/String;IZ)V")) {
         jstring jSecret = t.env->NewStringUTF(secret.c_str());
-        t.env->CallStaticVoidMethod(t.classID, t.methodID, applicationId, jSecret, environment, debug);
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, applicationId, jSecret, environmentFrmCocos(environment), debug);
         t.env->DeleteLocalRef(jSecret);
         t.env->DeleteLocalRef(t.classID);
     }
@@ -165,6 +167,20 @@ void GrowthPush::launchWithNotification(Application *target, GPRemoteNotificatio
         t.env->CallStaticVoidMethod(t.classID, t.methodID);
         t.env->DeleteLocalRef(t.classID);
     }
+}
+
+int environmentFrmCocos(GPEnvironment environment) {
+    
+    switch(environment) {
+        case GPEnvironmentUnknown:
+            return -1;
+        case GPEnvironmentDevelopment:
+            return 0;
+        case GPEnvironmentProduction:
+            return 1;
+    }
+    return -1;
+    
 }
 
 #endif

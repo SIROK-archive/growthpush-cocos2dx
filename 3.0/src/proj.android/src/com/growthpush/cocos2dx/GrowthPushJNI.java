@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.growthpush.GrowthPush;
+import com.growthpush.Environment;
 
 public class GrowthPushJNI {
     static final String LOG_TAG = "growthpush-cocos2dx";
@@ -90,8 +91,8 @@ public class GrowthPushJNI {
      */
     static native void didReceiveRemoteNotification(String json);
 
-    public static void initialize(int applicationId, final String secret, int environment, boolean debug) {
-        GrowthPush.getInstance().initialize(mContext, applicationId, secret, EnvironmentJNI.environmentFromCocos(environment), debug);
+    public static void initialize(int applicationId, final String secret, Environment environment, boolean debug) {
+        GrowthPush.getInstance().initialize(mContext, applicationId, secret, environment, debug);
     }
 
     public static void initialize(int applicationId, final String secret, int environment, boolean debug, int option) {
