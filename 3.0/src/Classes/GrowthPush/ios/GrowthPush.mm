@@ -17,11 +17,13 @@
 USING_NS_CC;
 // Don't use USING_NS_GROWTHPUSH. Because, it's conflict between GPEnvironment(C++) and GPEnvironment(Objective-C).
 
+int environmentFromCocos(growthpush::GPEnvironment environment);
+
 // C++ and Objective-C wrapper functions.
 static inline void _initialize(int applicationId, const std::string &secret, growthpush::GPEnvironment environment, bool debug) {
     [GrowthPushCCInternal setApplicationId:applicationId
                                     secret:[NSString stringWithUTF8String:secret.c_str()]
-                               environment:(GPEnvironment)environment
+                               environment:environmentFromCocos(environment)
                                      debug:debug];
 }
 
@@ -92,6 +94,20 @@ void growthpush::GrowthPush::launchWithNotification(Application *target, growthp
         auto jsonValue = GPJsonHelper::parseJson2Value([json UTF8String]);
         (target->*selector)(jsonValue);
     }];
+}
+
+int environmentFromCocos(growthpush::GPEnvironment environment) {
+    
+    switch(environment) {
+        case growthpush::GPEnvironmentUnknown:
+            return 0;
+        case growthpush::GPEnvironmentDevelopment:
+            return 1;
+        case growthpush::GPEnvironmentProduction:
+            return 2;
+    }
+    return 0;
+    
 }
 
 #endif

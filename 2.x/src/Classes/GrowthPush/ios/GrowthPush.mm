@@ -24,13 +24,15 @@ GrowthPush::~GrowthPush(void)
 {
 }
 
+int environmentFromCocos(growthpush::GPEnvironment environment);
+
 void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug)
 {
     CCAssert(secret, "secret should not be NULL");
     
     [GrowthPushCCInternal setApplicationId:applicationId
                                     secret:[NSString stringWithUTF8String:secret]
-                               environment:environment
+                               environment:environmentFromCocos(environment)
                                      debug:debug];
 }
 
@@ -107,6 +109,20 @@ void GrowthPush::launchWithNotification(CCApplication *target, GPRemoteNotificat
         CCDictionary *jsonDict = GPJsonHelper::parseJson2CCDictionary([json UTF8String]);
         (target->*selector)(jsonDict);
     }];
+}
+
+int environmentFromCocos(growthpush::GPEnvironment environment) {
+    
+    switch(environment) {
+        case growthpush::GPEnvironmentUnknown:
+            return 0;
+        case growthpush::GPEnvironmentDevelopment:
+            return 1;
+        case growthpush::GPEnvironmentProduction:
+            return 2;
+    }
+    return 0;
+    
 }
 
 #endif

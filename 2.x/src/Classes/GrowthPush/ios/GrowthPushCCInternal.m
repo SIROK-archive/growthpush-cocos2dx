@@ -27,19 +27,19 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
     [super dealloc];
 }
 
-+ (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(GPEnvironment)environment debug:(BOOL)debug
++ (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug
 {
     [EasyGrowthPush setApplicationId:applicationId
                           secret:secret
-                     environment:environment
+                     environment:GPEnvironmentFromInteger(environment)
                            debug:debug];
 }
 
-+ (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(GPEnvironment)environment debug:(BOOL)debug option:(EGPOption)option
++ (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug option:(EGPOption)option
 {
     [EasyGrowthPush setApplicationId:applicationId
                               secret:secret
-                         environment:environment
+                         environment:GPEnvironmentFromInteger(environment)
                                debug:debug
                               option:option];
 }
@@ -124,6 +124,22 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
             s_didReceiveRemoteNotificationBlock(json);
         }
     }
+}
+
+GPEnvironment GPEnvironmentFromInteger(int environment) {
+    
+    switch(environment) {
+            
+        case 0:
+            return GPEnvironmentUnknown;
+        case 1:
+            return GPEnvironmentDevelopment;
+        case 2:
+            return GPEnvironmentProduction;
+            
+    }
+    return 0;
+    
 }
 
 @end
