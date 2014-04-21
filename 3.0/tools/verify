@@ -1,0 +1,85 @@
+#!/usr/bin/php
+<?php
+
+define('ROOT_DIR', dirname(dirname(__FILE__)) . "/src/");
+
+$needed_files = array(
+	'GrowthPush.cpp',
+	'EGPOption.h',
+	'GPEnvironment.h',
+	'GPJsonHelper.h',
+	'GPMacros.h',
+	'GrowthPush.h',
+	'GrowthPush.mm',
+	'GrowthPushCCInternal.h',
+	'GrowthPushCCInternal.m',
+	'UIApplication+GrowthPushCCInternal.h',
+	'UIApplication+GrowthPushCCInternal.m',
+	'GPCocos2dxActivity.java',
+	'GPCocos2dxBroadcastReceiver.java',
+	'GrowthPushJNI.java',
+	'OptionJNI.java'
+);
+
+$acceptable_extensions = array();
+foreach ($needed_files as $needed_file) {
+	$acceptable_extensions[] = pathinfo($needed_file, PATHINFO_EXTENSION);
+}
+$acceptable_extensions = array_unique($acceptable_extensions);
+
+function list_files($directory, $acceptable_extensions) {
+
+	$files = array();
+	$file_names = scandir($directory);
+
+	foreach ($file_names as $file_name) {
+
+		if ($file_name === '.' || $file_name === '..')
+			continue;
+
+		if ($file_name === 'sampleProject')
+			continue;
+
+		if (is_file($directory . $file_name)) {
+
+			if (!in_array(pathinfo($file_name, PATHINFO_EXTENSION), $acceptable_extensions))
+				continue;
+
+			$files[] = $file_name;
+			continue;
+
+		}
+
+		if (is_dir($directory . $file_name)) {
+			$files = array_merge($files, list_files($directory . $file_name . '/', $acceptable_extensions));
+			continue;
+		}
+	}
+
+	return $files;
+
+}
+
+function checkFile($needed_files, $existed_files) {
+
+	foreach ($needed_files as $needed_file) {
+
+		echo "Check ${needed_file}... => ";
+		if (!in_array($needed_file, $existed_files)) {
+			echo "not exists.\n";
+			return false;
+		}
+
+		echo "exists.\n";
+
+	}
+
+	return true;
+
+}
+
+if (checkFile($needed_files, list_files(ROOT_DIR, $acceptable_extensions))) {
+	echo "[SUCCESS] Completed to verify package.\n";
+} else {
+	echo "[FATAL] Failed to verify package.\n";
+}
