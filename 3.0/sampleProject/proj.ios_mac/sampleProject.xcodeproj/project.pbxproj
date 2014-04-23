@@ -24,7 +24,6 @@
 		2464A0F719052DE700432B9E /* GrowthPush.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0EB19052DE700432B9E /* GrowthPush.cpp */; };
 		2464A0F819052DE700432B9E /* GrowthPush.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0F219052DE700432B9E /* GrowthPush.mm */; };
 		2464A0F919052DE700432B9E /* GrowthPushCCInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0F419052DE700432B9E /* GrowthPushCCInternal.m */; };
-		2464A0FA19052DE700432B9E /* UIApplication+GrowthPushCCInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0F619052DE700432B9E /* UIApplication+GrowthPushCCInternal.m */; };
 		2464A0FC19052F0400432B9E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464A0FB19052F0400432B9E /* CoreMotion.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
@@ -65,6 +64,8 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		B2BECE4819087DDE00D87478 /* GrowthPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BECE4719087DDE00D87478 /* GrowthPush.framework */; };
+		B2BECE4B19087EBC00D87478 /* UIApplication+GrowthPush.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BECE4A19087EBC00D87478 /* UIApplication+GrowthPush.m */; };
+		B2BECE5019087F9400D87478 /* GPAppDelegateIntercepter.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BECE4F19087F9400D87478 /* GPAppDelegateIntercepter.m */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
@@ -205,8 +206,6 @@
 		2464A0F219052DE700432B9E /* GrowthPush.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GrowthPush.mm; sourceTree = "<group>"; };
 		2464A0F319052DE700432B9E /* GrowthPushCCInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowthPushCCInternal.h; sourceTree = "<group>"; };
 		2464A0F419052DE700432B9E /* GrowthPushCCInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowthPushCCInternal.m; sourceTree = "<group>"; };
-		2464A0F519052DE700432B9E /* UIApplication+GrowthPushCCInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+GrowthPushCCInternal.h"; sourceTree = "<group>"; };
-		2464A0F619052DE700432B9E /* UIApplication+GrowthPushCCInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+GrowthPushCCInternal.m"; sourceTree = "<group>"; };
 		2464A0FB19052F0400432B9E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
@@ -242,6 +241,12 @@
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
 		B2BECE4719087DDE00D87478 /* GrowthPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthPush.framework; path = "../../submodules/growthpush-ios/GrowthPush.framework"; sourceTree = "<group>"; };
+		B2BECE4919087EBC00D87478 /* UIApplication+GrowthPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+GrowthPush.h"; sourceTree = "<group>"; };
+		B2BECE4A19087EBC00D87478 /* UIApplication+GrowthPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+GrowthPush.m"; sourceTree = "<group>"; };
+		B2BECE4C19087F3200D87478 /* GPAppDelegateWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPAppDelegateWrapper.h; path = ../../../../src/Classes/GrowthPush/ios/GPAppDelegateWrapper.h; sourceTree = "<group>"; };
+		B2BECE4D19087F3200D87478 /* GPAppDelegateWrapperDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPAppDelegateWrapperDelegate.h; path = ../../../../src/Classes/GrowthPush/ios/GPAppDelegateWrapperDelegate.h; sourceTree = "<group>"; };
+		B2BECE4E19087F9400D87478 /* GPAppDelegateIntercepter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateIntercepter.h; sourceTree = "<group>"; };
+		B2BECE4F19087F9400D87478 /* GPAppDelegateIntercepter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPAppDelegateIntercepter.m; sourceTree = "<group>"; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -377,8 +382,12 @@
 				2464A0F219052DE700432B9E /* GrowthPush.mm */,
 				2464A0F319052DE700432B9E /* GrowthPushCCInternal.h */,
 				2464A0F419052DE700432B9E /* GrowthPushCCInternal.m */,
-				2464A0F519052DE700432B9E /* UIApplication+GrowthPushCCInternal.h */,
-				2464A0F619052DE700432B9E /* UIApplication+GrowthPushCCInternal.m */,
+				B2BECE4919087EBC00D87478 /* UIApplication+GrowthPush.h */,
+				B2BECE4A19087EBC00D87478 /* UIApplication+GrowthPush.m */,
+				B2BECE4C19087F3200D87478 /* GPAppDelegateWrapper.h */,
+				B2BECE4D19087F3200D87478 /* GPAppDelegateWrapperDelegate.h */,
+				B2BECE4E19087F9400D87478 /* GPAppDelegateIntercepter.h */,
+				B2BECE4F19087F9400D87478 /* GPAppDelegateIntercepter.m */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -682,10 +691,11 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				2464A0F719052DE700432B9E /* GrowthPush.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				B2BECE5019087F9400D87478 /* GPAppDelegateIntercepter.m in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				2464A0F819052DE700432B9E /* GrowthPush.mm in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
-				2464A0FA19052DE700432B9E /* UIApplication+GrowthPushCCInternal.m in Sources */,
+				B2BECE4B19087EBC00D87478 /* UIApplication+GrowthPush.m in Sources */,
 				2464A0F919052DE700432B9E /* GrowthPushCCInternal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

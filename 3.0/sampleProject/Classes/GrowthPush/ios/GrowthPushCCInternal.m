@@ -13,8 +13,6 @@
 
 #import <GrowthPush/GrowthPush.h>
 
-#import "UIApplication+GrowthPushCCInternal.h"
-
 static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 
 @implementation GrowthPushCCInternal
