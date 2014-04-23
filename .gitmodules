@@ -1,3 +1,6 @@
 [submodule "2.x/submodules/cocos2d-x"]
 	path = 2.x/submodules/cocos2d-x
 	url = git@github.com:cocos2d/cocos2d-x.git
+[submodule "3.0/submodules/cocos2d-x"]
+	path = 3.0/submodules/cocos2d-x
+	url = git@github.com:cocos2d/cocos2d-x.git
