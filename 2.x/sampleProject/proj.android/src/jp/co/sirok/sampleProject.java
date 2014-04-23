@@ -30,10 +30,13 @@ import android.os.Bundle;
 
 import com.growthpush.cocos2dx.GPCocos2dxActivity;
 
-public class sampleProject extends GPCocos2dxActivity {
+public class sampleProject extends Cocos2dxActivity {
+	
+	static GrowthPushJNI growthpush;
 	
     protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);	
+		growthpush = new GrowthPushJNI(getApplicationContext());
 	}
 
     public Cocos2dxGLSurfaceView onCreateView() {
@@ -47,4 +50,5 @@ public class sampleProject extends GPCocos2dxActivity {
     static {
         System.loadLibrary("cocos2dcpp");
     }     
+    
 }
