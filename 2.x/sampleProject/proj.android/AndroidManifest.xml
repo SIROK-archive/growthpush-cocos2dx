@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="jp.co.sirok.cocos2d2sample"
+      package="com.growthpush.cocos2dx.sample"
       android:versionCode="1"
       android:versionName="1.0">
 
@@ -37,7 +37,7 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="jp.co.sirok.cocos2d2sample" />
+                <category android:name="com.growthpush.cocos2dx.sample" />
             </intent-filter>
         </receiver>
     </application>
@@ -48,6 +48,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <permission android:name="jp.co.sirok.cocos2d2sample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="jp.co.sirok.cocos2d2sample.permission.C2D_MESSAGE" />
+    <permission android:name="com.growthpush.cocos2dx.sample.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.growthpush.cocos2dx.sample.permission.C2D_MESSAGE" />
 </manifest> 

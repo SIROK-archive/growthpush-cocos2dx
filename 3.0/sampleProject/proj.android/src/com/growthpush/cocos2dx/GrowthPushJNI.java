@@ -76,8 +76,6 @@ public class GrowthPushJNI {
 
 	}
 
-
-
 	/*
 	 * Remote notification callback method (JNI interface)
 	 * 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>sampleProject</name>
+	<name>GrowthPushCocos2dx2Sample</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -102,7 +102,7 @@
 		<link>
 			<name>Classes</name>
 			<type>2</type>
-			<location>COCOS2DX/projects/sampleProject/Classes</location>
+			<locationURI>COCOS2DX/projects/sampleProject/Classes</locationURI>
 		</link>
 		<link>
 			<name>cocos2dx</name>
@@ -112,7 +112,7 @@
 		<link>
 			<name>extensions</name>
 			<type>2</type>
-			<location>COCOS2DX/extensions</location>
+			<locationURI>COCOS2DX/extensions</locationURI>
 		</link>
 		<link>
 			<name>scripting</name>
