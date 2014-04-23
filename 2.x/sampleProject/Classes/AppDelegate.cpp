@@ -5,21 +5,18 @@
 USING_NS_CC;
 USING_NS_GROWTHPUSH;
 
-AppDelegate::AppDelegate() {
+AppDelegate::AppDelegate() {}
 
-}
-
-AppDelegate::~AppDelegate() 
-{
-}
+AppDelegate::~AppDelegate()
+{}
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
-    CCDirector* pDirector = CCDirector::sharedDirector();
-    CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
+    CCDirector *pDirector = CCDirector::sharedDirector();
+    CCEGLView *pEGLView = CCEGLView::sharedOpenGLView();
 
     pDirector->setOpenGLView(pEGLView);
-	
+
     // turn on display FPS
     pDirector->setDisplayStats(true);
 
@@ -31,7 +28,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     pDirector->runWithScene(pScene);
-    
+
     GrowthPush::initialize(1073, "6FXZqI62wKk5YXy0EYrcVVrQrkO75Crv", GPEnvironmentProduction, true);
     GrowthPush::registerDeviceToken("YOUR_SENDER_ID");
     GrowthPush::setDeviceTags();

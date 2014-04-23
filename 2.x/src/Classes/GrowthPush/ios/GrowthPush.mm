@@ -1,4 +1,5 @@
 //
+
 //  GrowthPush.mm
 //  growthpush-cocos2dx
 //
@@ -17,112 +18,101 @@ USING_NS_CC;
 USING_NS_GROWTHPUSH;
 
 GrowthPush::GrowthPush(void)
-{
-}
+{}
 
 GrowthPush::~GrowthPush(void)
-{
-}
+{}
 
 int environmentFromCocos(growthpush::GPEnvironment environment);
 
-void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug)
-{
+void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug) {
     CCAssert(secret, "secret should not be NULL");
-    
+
     [GrowthPushCCInternal setApplicationId:applicationId
-                                    secret:[NSString stringWithUTF8String:secret]
-                               environment:environmentFromCocos(environment)
-                                     debug:debug];
+     secret:[NSString stringWithUTF8String:secret]
+     environment:environmentFromCocos(environment)
+     debug:debug];
 }
 
-void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug, growthpush::EGPOption option)
-{
+void GrowthPush::initialize(int applicationId, const char *secret, growthpush::GPEnvironment environment, bool debug, growthpush::EGPOption option) {
     CCAssert(secret, "secret should not be NULL");
-    
+
     [GrowthPushCCInternal setApplicationId:applicationId
-                                    secret:[NSString stringWithUTF8String:secret]
-                               environment:environment
-                                     debug:debug
-                                    option:option];
+     secret:[NSString stringWithUTF8String:secret]
+     environment:environment
+     debug:debug
+     option:option];
 }
 
-void GrowthPush::registerDeviceToken(void)
-{
+void GrowthPush::registerDeviceToken(void) {
     [GrowthPushCCInternal requestDeviceToken];
 }
 
-void GrowthPush::registerDeviceToken(const char *senderId)
-{
-    CC_UNUSED_PARAM(senderId);  // ignore senderID
+void GrowthPush::registerDeviceToken(const char *senderId) {
+    CC_UNUSED_PARAM(senderId); // ignore senderID
     registerDeviceToken();
 }
 
-void GrowthPush::trackEvent(const char *name)
-{
+void GrowthPush::trackEvent(const char *name) {
     CCAssert(name, "name should not be NULL");
-    
+
     [GrowthPushCCInternal trackEvent:[NSString stringWithUTF8String:name]];
 }
 
-void GrowthPush::trackEvent(const char *name, const char *value)
-{
+void GrowthPush::trackEvent(const char *name, const char *value) {
     CCAssert(name, "name should not be NULL");
     CCAssert(value, "value should not be NULL");
-    
+
     [GrowthPushCCInternal trackEvent:[NSString stringWithUTF8String:name]
-                               value:[NSString stringWithUTF8String:value]];
+     value:[NSString stringWithUTF8String:value]];
 }
 
-void GrowthPush::setTag(const char *name)
-{
+void GrowthPush::setTag(const char *name) {
     CCAssert(name, "name should not be NULL");
-    
+
     [GrowthPushCCInternal setTag:[NSString stringWithUTF8String:name]];
 }
 
-void GrowthPush::setTag(const char *name, const char *value)
-{
+void GrowthPush::setTag(const char *name, const char *value) {
     CCAssert(name, "name should not be NULL");
     CCAssert(value, "value should not be NULL");
-    
+
     [GrowthPushCCInternal setTag:[NSString stringWithUTF8String:name]
-                           value:[NSString stringWithUTF8String:value]];
+     value:[NSString stringWithUTF8String:value]];
 }
 
-void GrowthPush::setDeviceTags(void)
-{
+void GrowthPush::setDeviceTags(void) {
     [GrowthPushCCInternal setDeviceTags];
 }
 
-void GrowthPush::clearBadge(void)
-{
+void GrowthPush::clearBadge(void) {
     [GrowthPushCCInternal clearBadge];
 }
 
-void GrowthPush::launchWithNotification(CCApplication *target, GPRemoteNotificationCallFunc selector)
-{
+void GrowthPush::launchWithNotification(CCApplication *target, GPRemoteNotificationCallFunc selector) {
     CCAssert(target, "target should not be NULL");
     CCAssert(selector, "selector should not be NULL");
-    
+
     [GrowthPushCCInternal setDidReceiveNotificationBlock:^(NSString *json) {
-        CCDictionary *jsonDict = GPJsonHelper::parseJson2CCDictionary([json UTF8String]);
-        (target->*selector)(jsonDict);
-    }];
+         CCDictionary *jsonDict = GPJsonHelper::parseJson2CCDictionary([json UTF8String]);
+         (target->*selector)(jsonDict);
+     }];
 }
 
 int environmentFromCocos(growthpush::GPEnvironment environment) {
-    
-    switch(environment) {
+
+    switch (environment) {
         case growthpush::GPEnvironmentUnknown:
             return 0;
+
         case growthpush::GPEnvironmentDevelopment:
             return 1;
+
         case growthpush::GPEnvironmentProduction:
             return 2;
     }
     return 0;
-    
+
 }
 
 #endif
