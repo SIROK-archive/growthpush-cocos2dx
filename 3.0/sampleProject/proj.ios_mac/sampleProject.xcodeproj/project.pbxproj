@@ -21,7 +21,6 @@
 		2464A0D9190527D000432B9E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464A0D8190527D000432B9E /* OpenGLES.framework */; };
 		2464A0DB190527D400432B9E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464A0DA190527D400432B9E /* UIKit.framework */; };
 		2464A0DD190527E700432B9E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464A0DC190527E700432B9E /* Security.framework */; };
-		2464A0E819052DD700432B9E /* GrowthPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464A0E719052DD700432B9E /* GrowthPush.framework */; };
 		2464A0F719052DE700432B9E /* GrowthPush.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0EB19052DE700432B9E /* GrowthPush.cpp */; };
 		2464A0F819052DE700432B9E /* GrowthPush.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0F219052DE700432B9E /* GrowthPush.mm */; };
 		2464A0F919052DE700432B9E /* GrowthPushCCInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464A0F419052DE700432B9E /* GrowthPushCCInternal.m */; };
@@ -65,6 +64,7 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		B2BECE4819087DDE00D87478 /* GrowthPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2BECE4719087DDE00D87478 /* GrowthPush.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
@@ -197,7 +197,6 @@
 		2464A0DC190527E700432B9E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		2464A0DE190527F000432B9E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		2464A0E01905281D00432B9E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		2464A0E719052DD700432B9E /* GrowthPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthPush.framework; path = ios/GrowthPush.framework; sourceTree = "<group>"; };
 		2464A0EB19052DE700432B9E /* GrowthPush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GrowthPush.cpp; sourceTree = "<group>"; };
 		2464A0ED19052DE700432B9E /* GPEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPEnvironment.h; sourceTree = "<group>"; };
 		2464A0EE19052DE700432B9E /* GPJsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPJsonHelper.h; sourceTree = "<group>"; };
@@ -242,6 +241,7 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		B2BECE4719087DDE00D87478 /* GrowthPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthPush.framework; path = "../../submodules/growthpush-ios/GrowthPush.framework"; sourceTree = "<group>"; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -269,8 +269,8 @@
 				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
 				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
+				B2BECE4819087DDE00D87478 /* GrowthPush.framework in Frameworks */,
 				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
-				2464A0E819052DD700432B9E /* GrowthPush.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,13 +400,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2BECE4719087DDE00D87478 /* GrowthPush.framework */,
 				5087E78817EB974C00C73F5D /* AppKit.framework */,
 				D44C620F132DFF4E0009C878 /* AudioToolbox.framework */,
 				D44C620D132DFF430009C878 /* AVFoundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				2464A0FB19052F0400432B9E /* CoreMotion.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				2464A0E719052DD700432B9E /* GrowthPush.framework */,
 				503AE11A17EB9C5A00D1A890 /* IOKit.framework */,
 				1ACB3243164770DE00914215 /* libcurl.a */,
 				503AE11117EB99EE00D1A890 /* libcurl.dylib */,
@@ -740,6 +740,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ios",
+					"$(PROJECT_DIR)/../../submodules/growthpush-ios/",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -781,6 +782,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ios",
+					"$(PROJECT_DIR)/../../submodules/growthpush-ios/",
 				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

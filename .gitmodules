@@ -4,3 +4,9 @@
 [submodule "3.0/submodules/cocos2d-x"]
 	path = 3.0/submodules/cocos2d-x
 	url = git@github.com:cocos2d/cocos2d-x.git
+[submodule "3.0/submodules/growthpush-ios"]
+	path = 3.0/submodules/growthpush-ios
+	url = https://github.com/SIROK/growthpush-ios.git
+[submodule "3.0/submodules/growthpush-android"]
+	path = 3.0/submodules/growthpush-android
+	url = https://github.com/SIROK/growthpush-android.git
