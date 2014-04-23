@@ -28,7 +28,7 @@
 + (void)clearBadge;
 
 /* ANPs callback method */
-+ (void)setDidReceiveNotificationBlock:(void (^)(NSString *json))block;
++ (void)setDidReceiveNotificationBlock:(void(^) (NSString * json))block;
 
 /* UIApplicationDelegate methods */
 + (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
@@ -38,4 +38,4 @@
 
 @end
 
-#endif
+#endif // if CC_TARGET_PLATFORM == CC_PLATFORM_IOS

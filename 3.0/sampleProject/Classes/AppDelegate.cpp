@@ -5,19 +5,17 @@
 USING_NS_CC;
 USING_NS_GROWTHPUSH;
 
-AppDelegate::AppDelegate() {
+AppDelegate::AppDelegate() {}
 
-}
-
-AppDelegate::~AppDelegate() 
-{
-}
+AppDelegate::~AppDelegate()
+{}
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
-    if(!glview) {
+
+    if (!glview) {
         glview = GLView::create("My Game");
         director->setOpenGLView(glview);
     }
@@ -33,7 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     director->runWithScene(scene);
-    
+
     GrowthPush::initialize(1074, "sH2RhzDPNZKmXAKwqtG6pHNvDalIGk54", GPEnvironmentProduction, true);
     GrowthPush::registerDeviceToken("870898687785");
     GrowthPush::setDeviceTags();
