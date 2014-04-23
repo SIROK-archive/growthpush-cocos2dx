@@ -18,7 +18,6 @@
 
 /* GrowthPush SDK interface */
 + (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug;
-+ (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug option:(EGPOption)option;
 + (void)requestDeviceToken;
 + (void)trackEvent:(NSString *)name;
 + (void)trackEvent:(NSString *)name value:(NSString *)value;

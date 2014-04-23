@@ -199,7 +199,6 @@
 		2464A0E01905281D00432B9E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		2464A0E719052DD700432B9E /* GrowthPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthPush.framework; path = ios/GrowthPush.framework; sourceTree = "<group>"; };
 		2464A0EB19052DE700432B9E /* GrowthPush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GrowthPush.cpp; sourceTree = "<group>"; };
-		2464A0EC19052DE700432B9E /* EGPOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGPOption.h; sourceTree = "<group>"; };
 		2464A0ED19052DE700432B9E /* GPEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPEnvironment.h; sourceTree = "<group>"; };
 		2464A0EE19052DE700432B9E /* GPJsonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPJsonHelper.h; sourceTree = "<group>"; };
 		2464A0EF19052DE700432B9E /* GPMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPMacros.h; sourceTree = "<group>"; };
@@ -354,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				2464A0EA19052DE700432B9E /* android */,
-				2464A0EC19052DE700432B9E /* EGPOption.h */,
 				2464A0ED19052DE700432B9E /* GPEnvironment.h */,
 				2464A0EE19052DE700432B9E /* GPJsonHelper.h */,
 				2464A0EF19052DE700432B9E /* GPMacros.h */,

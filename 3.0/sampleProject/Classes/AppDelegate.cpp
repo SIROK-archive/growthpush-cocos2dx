@@ -34,6 +34,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     GrowthPush::initialize(1074, "sH2RhzDPNZKmXAKwqtG6pHNvDalIGk54", GPEnvironmentProduction, true);
     GrowthPush::registerDeviceToken("870898687785");
+    GrowthPush::trackEvent("Launch");
     GrowthPush::setDeviceTags();
 
     return true;

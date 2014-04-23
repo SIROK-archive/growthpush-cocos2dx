@@ -12,7 +12,6 @@
 #include "cocos2d.h"
 
 #include "GPEnvironment.h"
-#include "EGPOption.h"
 
 NS_GROWTHPUSH_BEGIN
 

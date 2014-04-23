@@ -33,10 +33,6 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
     [GrowthPush setApplicationId:applicationId secret:secret environment:GPEnvironmentFromInteger(environment) debug:debug];
 }
 
-+ (void) setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug option:(EGPOption)option {
-    [EasyGrowthPush setApplicationId:applicationId secret:secret environment:GPEnvironmentFromInteger(environment) debug:debug option:option];
-}
-
 + (void) requestDeviceToken {
     [GrowthPush requestDeviceToken];
 }
