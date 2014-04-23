@@ -2350,7 +2350,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../submodules/cocos2d-x/external/libwebsockets/ios/lib\"",
-					"\"$(SRCROOT)/../../submodules/cocos2d-x/cocos2dx/platform/third_party/android\"/**",
 					"\"$(SRCROOT)/../../submodules/cocos2d-x/cocos2dx/platform/third_party/ios\"/**",
 					"\"$(SRCROOT)/../../submodules/cocos2d-x/cocos2dx/platform/third_party/mac\"/**",
 				);
@@ -2404,7 +2403,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../submodules/cocos2d-x/external/libwebsockets/ios/lib\"",
-					"\"$(SRCROOT)/../../submodules/cocos2d-x/cocos2dx/platform/third_party/android\"/**",
 					"\"$(SRCROOT)/../../submodules/cocos2d-x/cocos2dx/platform/third_party/ios\"/**",
 					"\"$(SRCROOT)/../../submodules/cocos2d-x/cocos2dx/platform/third_party/mac\"/**",
 				);
