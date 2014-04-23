@@ -28,8 +28,6 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.os.Bundle;
 
-import com.growthpush.cocos2dx.GPCocos2dxActivity;
-
 public class sampleProject extends Cocos2dxActivity {
 	
 	static GrowthPushJNI growthpush;

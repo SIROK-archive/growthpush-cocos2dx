@@ -42,7 +42,7 @@ def check_environment_variables():
     '''
 
     try:
-        NDK_ROOT = os.environ['NDK_ROOT']
+        NDK_ROOT = "/Users/daikiasahi/developments/android/android-ndk"
     except Exception:
         print "NDK_ROOT not defined. Please define NDK_ROOT in your environment"
         sys.exit(1)
@@ -132,7 +132,7 @@ def build(ndk_build_param,android_platform,build_mode):
     select_toolchain_version()
 
     current_dir = os.path.dirname(os.path.realpath(__file__))
-    cocos_root = os.path.join(current_dir, "../cocos2d")
+    cocos_root = os.path.join(current_dir, "../../submodules/cocos2d-x")
 
     app_android_root = current_dir
     copy_resources(app_android_root)
