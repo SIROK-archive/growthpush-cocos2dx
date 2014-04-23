@@ -22,6 +22,12 @@ virtual ~AppDelegate();
 virtual bool applicationDidFinishLaunching();
 
 /**
+ * @brief   Callback function called when notification is opened.
+ * @param extra Push notification parameters and custom fields
+ */
+virtual void didLaunchWithNotification(cocos2d::Value extra);
+    
+/**
  * @brief  The function be called when the application enter background
  * @param  the pointer of the application
  */

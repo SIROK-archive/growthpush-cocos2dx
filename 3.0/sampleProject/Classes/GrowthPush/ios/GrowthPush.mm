@@ -21,11 +21,6 @@ USING_NS_CC;
 
 int environmentFromCocos(growthpush::GPEnvironment environment);
 
-// C++ and Objective-C wrapper functions.
-static inline void _initialize(int applicationId, const std::string& secret, growthpush::GPEnvironment environment, bool debug) {
-    [GrowthPushCCInternal setApplicationId:applicationId secret:[NSString stringWithUTF8String:secret.c_str()] environment:environmentFromCocos(environment) debug:debug];
-}
-
 growthpush::GrowthPush::GrowthPush(void)
 {}
 
@@ -33,7 +28,7 @@ growthpush::GrowthPush::~GrowthPush(void)
 {}
 
 void growthpush::GrowthPush::initialize(int applicationId, const std::string& secret, growthpush::GPEnvironment environment, bool debug) {
-    _initialize(applicationId, secret, environment, debug);
+    [GrowthPushCCInternal setApplicationId:applicationId secret:[NSString stringWithUTF8String:secret.c_str()] environment:environmentFromCocos(environment) debug:debug];
 }
 
 void growthpush::GrowthPush::registerDeviceToken(void) {
@@ -42,7 +37,7 @@ void growthpush::GrowthPush::registerDeviceToken(void) {
 
 void growthpush::GrowthPush::registerDeviceToken(const std::string& senderId) {
 
-    CC_UNUSED_PARAM(senderId); // ignore senderID
+    CC_UNUSED_PARAM(senderId);
     registerDeviceToken();
 
 }
