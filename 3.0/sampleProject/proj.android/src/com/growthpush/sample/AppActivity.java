@@ -23,8 +23,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-****************************************************************************/
-package com.growthpush.cocos2dx.sample;
+ ****************************************************************************/
+package com.growthpush.sample;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
@@ -37,8 +37,8 @@ public class AppActivity extends Cocos2dxActivity {
 	static GrowthPushJNI growthpush;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		growthpush = new GrowthPushJNI(getApplicationContext());
 	}
 

@@ -4,8 +4,6 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.content.Context;
 
-import com.growthpush.ExternalFramework;
-import com.growthpush.ExternalFramework.Framework;
 import com.growthpush.GrowthPush;
 import com.growthpush.model.Environment;
 

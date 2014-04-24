@@ -1,6 +1,8 @@
-package com.growthpush.bridge;
+package com.growthpush.cocos2dx;
 
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
+
+import com.growthpush.bridge.ExternalFrameworkBridge;
 
 public class Cocos2dxBridge extends ExternalFrameworkBridge {
 

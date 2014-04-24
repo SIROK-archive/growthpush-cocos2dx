@@ -1,4 +1,6 @@
-package com.growthpush.bridge;
+package com.growthpush.cocos2dx;
+
+import com.growthpush.bridge.ExternalFrameworkBroadcastReceiver;
 
 public class Cocos2dxBroadcastReceiver extends ExternalFrameworkBroadcastReceiver {
 
