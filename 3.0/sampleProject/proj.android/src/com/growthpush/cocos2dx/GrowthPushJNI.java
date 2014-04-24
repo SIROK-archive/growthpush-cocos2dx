@@ -33,7 +33,7 @@ public class GrowthPushJNI {
 	}
 
 	public static void initialize(int applicationId, final String secret, int environment, boolean debug, int option) {
-		GrowthPush.getInstance().initialize(mContext, applicationId, secret, GrowthPushJNI.EnvironmentFromInteger(environment), debug);
+		GrowthPush.getInstance().initialize(mContext, applicationId, secret, convertIntToEnvironment(environment), debug);
 	}
 
 	public static void register(final String senderId) {
@@ -64,7 +64,7 @@ public class GrowthPushJNI {
 		ExternalFramework.callTrackGrowthPushMessage();
 	}
 
-	public static Environment EnvironmentFromInteger(int environment) {
+	public static Environment convertIntToEnvironment(int environment) {
 
 		switch (environment) {
 		case 1:

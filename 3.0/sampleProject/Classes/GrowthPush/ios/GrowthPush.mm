@@ -75,7 +75,7 @@ void growthpush::GrowthPush::launchWithNotification(Application *target, growthp
     CCAssert(selector, "selector should not be NULL");
 
     [GrowthPushCCInternal setDidReceiveNotificationBlock:^(NSString *json) {
-         auto jsonValue = GPJsonHelper::parseJson2Value([json UTF8String]);
+        cocos2d::Value jsonValue = GPJsonHelper::parseJson2Value([json UTF8String]);
          (target->*selector)(jsonValue);
      }];
 

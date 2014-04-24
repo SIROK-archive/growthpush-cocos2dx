@@ -16,19 +16,19 @@
 @implementation GPAppDelegateIntercepter
 
 - (BOOL) willPerformApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    return [GrowthPushCCInternal didFinishLaunchingWithOptions:launchOptions];
+    return [GrowthPushCCInternal application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void) didPerformApplication:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [GrowthPushCCInternal didReceiveRemoteNotification:userInfo];
+    [GrowthPushCCInternal application:application didReceiveRemoteNotification:userInfo];
 }
 
 - (void) willPerformApplication:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [GrowthPushCCInternal didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    [GrowthPushCCInternal application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void) willPerformApplication:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    [GrowthPushCCInternal didFailToRegisterForRemoteNotificationsWithError:error];
+    [GrowthPushCCInternal application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 
