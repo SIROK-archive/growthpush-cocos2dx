@@ -28,7 +28,7 @@ growthpush::GrowthPush::~GrowthPush(void)
 {}
 
 void growthpush::GrowthPush::initialize(int applicationId, const std::string& secret, growthpush::GPEnvironment environment, bool debug) {
-    [GrowthPushCCInternal setApplicationId:applicationId secret:[NSString stringWithUTF8String:secret.c_str()] environment:environmentFromCocos(environment) debug:debug];
+    [GrowthPushCCInternal setApplicationId:applicationId secret:[NSString stringWithUTF8String:secret.c_str()] environment:environment debug:debug];
 }
 
 void growthpush::GrowthPush::registerDeviceToken(void) {
@@ -78,22 +78,6 @@ void growthpush::GrowthPush::launchWithNotification(Application *target, growthp
          auto jsonValue = GPJsonHelper::parseJson2Value([json UTF8String]);
          (target->*selector)(jsonValue);
      }];
-
-}
-
-int environmentFromCocos(growthpush::GPEnvironment environment) {
-
-    switch (environment) {
-        case growthpush::GPEnvironmentUnknown:
-            return 0;
-
-        case growthpush::GPEnvironmentDevelopment:
-            return 1;
-
-        case growthpush::GPEnvironmentProduction:
-            return 2;
-    }
-    return 0;
 
 }
 

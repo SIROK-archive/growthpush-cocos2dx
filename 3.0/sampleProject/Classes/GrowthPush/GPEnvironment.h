@@ -15,8 +15,8 @@ NS_GROWTHPUSH_BEGIN
 
 typedef enum GPEnvironment {
     GPEnvironmentUnknown = 0,
-    GPEnvironmentDevelopment,
-    GPEnvironmentProduction,
+    GPEnvironmentDevelopment = 1,
+    GPEnvironmentProduction = 2,
 } GPEnvironment;
 
 NS_GROWTHPUSH_END

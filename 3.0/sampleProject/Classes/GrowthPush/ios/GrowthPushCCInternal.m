@@ -111,16 +111,13 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 GPEnvironment GPEnvironmentFromInteger(int environment) {
 
     switch (environment) {
-
-        case 0:
-            return GPEnvironmentUnknown;
         case 1:
             return GPEnvironmentDevelopment;
         case 2:
             return GPEnvironmentProduction;
-
+        default:
+            return GPEnvironmentUnknown;
     }
-    return 0;
 
 }
 

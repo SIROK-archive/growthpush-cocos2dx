@@ -67,12 +67,13 @@ public class GrowthPushJNI {
 	public static Environment EnvironmentFromInteger(int environment) {
 
 		switch (environment) {
-		case 0:
-			return Environment.development;
 		case 1:
+			return Environment.development;
+		case 2:
 			return Environment.production;
+		default:
+			return null;
 		}
-		return null;
 
 	}
 

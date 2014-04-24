@@ -32,7 +32,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // run
     director->runWithScene(scene);
 
-    GrowthPush::initialize(1074, "sH2RhzDPNZKmXAKwqtG6pHNvDalIGk54", GPEnvironmentProduction, true);
+    GrowthPush::initialize(1074, "sH2RhzDPNZKmXAKwqtG6pHNvDalIGk54", GPEnvironmentDevelopment, true);
     GrowthPush::registerDeviceToken("870898687785");
     GrowthPush::trackEvent("Launch");
     GrowthPush::setDeviceTags();
