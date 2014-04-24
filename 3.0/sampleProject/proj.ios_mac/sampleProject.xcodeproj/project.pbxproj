@@ -243,10 +243,10 @@
 		B2BECE4719087DDE00D87478 /* GrowthPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GrowthPush.framework; path = "../../submodules/growthpush-ios/GrowthPush.framework"; sourceTree = "<group>"; };
 		B2BECE4919087EBC00D87478 /* UIApplication+GrowthPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+GrowthPush.h"; sourceTree = "<group>"; };
 		B2BECE4A19087EBC00D87478 /* UIApplication+GrowthPush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+GrowthPush.m"; sourceTree = "<group>"; };
-		B2BECE4C19087F3200D87478 /* GPAppDelegateWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPAppDelegateWrapper.h; path = ../../../../src/Classes/GrowthPush/ios/GPAppDelegateWrapper.h; sourceTree = "<group>"; };
-		B2BECE4D19087F3200D87478 /* GPAppDelegateWrapperDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPAppDelegateWrapperDelegate.h; path = ../../../../src/Classes/GrowthPush/ios/GPAppDelegateWrapperDelegate.h; sourceTree = "<group>"; };
 		B2BECE4E19087F9400D87478 /* GPAppDelegateIntercepter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateIntercepter.h; sourceTree = "<group>"; };
 		B2BECE4F19087F9400D87478 /* GPAppDelegateIntercepter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPAppDelegateIntercepter.m; sourceTree = "<group>"; };
+		B2BECE591908DC0F00D87478 /* GPAppDelegateWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateWrapper.h; sourceTree = "<group>"; };
+		B2BECE5A1908DC0F00D87478 /* GPAppDelegateWrapperDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPAppDelegateWrapperDelegate.h; sourceTree = "<group>"; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -379,15 +379,15 @@
 		2464A0F119052DE700432B9E /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				B2BECE4E19087F9400D87478 /* GPAppDelegateIntercepter.h */,
+				B2BECE4F19087F9400D87478 /* GPAppDelegateIntercepter.m */,
+				B2BECE591908DC0F00D87478 /* GPAppDelegateWrapper.h */,
+				B2BECE5A1908DC0F00D87478 /* GPAppDelegateWrapperDelegate.h */,
 				2464A0F219052DE700432B9E /* GrowthPush.mm */,
 				2464A0F319052DE700432B9E /* GrowthPushCCInternal.h */,
 				2464A0F419052DE700432B9E /* GrowthPushCCInternal.m */,
 				B2BECE4919087EBC00D87478 /* UIApplication+GrowthPush.h */,
 				B2BECE4A19087EBC00D87478 /* UIApplication+GrowthPush.m */,
-				B2BECE4C19087F3200D87478 /* GPAppDelegateWrapper.h */,
-				B2BECE4D19087F3200D87478 /* GPAppDelegateWrapperDelegate.h */,
-				B2BECE4E19087F9400D87478 /* GPAppDelegateIntercepter.h */,
-				B2BECE4F19087F9400D87478 /* GPAppDelegateIntercepter.m */,
 			);
 			path = ios;
 			sourceTree = "<group>";

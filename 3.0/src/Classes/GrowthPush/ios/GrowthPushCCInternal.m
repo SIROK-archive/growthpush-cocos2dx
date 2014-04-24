@@ -13,8 +13,6 @@
 
 #import <GrowthPush/GrowthPush.h>
 
-#import "UIApplication+GrowthPushCCInternal.h"
-
 static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 
 @implementation GrowthPushCCInternal
@@ -30,11 +28,7 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 }
 
 + (void) setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug {
-    [GrowthPush setApplicationId:applicationId secret:secret environment:GPEnvironmentFromInteger(environment) debug:debug];
-}
-
-+ (void) setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug option:(EGPOption)option {
-    [EasyGrowthPush setApplicationId:applicationId secret:secret environment:GPEnvironmentFromInteger(environment) debug:debug option:option];
+    [GrowthPush setApplicationId:applicationId secret:secret environment:[self convertIntToGPEnvironment:environment] debug:debug];
 }
 
 + (void) requestDeviceToken {
@@ -77,56 +71,63 @@ static void (^s_didReceiveRemoteNotificationBlock)(NSString *json) = NULL;
 #pragma mark -
 #pragma UIApplicationDelegate hook methods
 
-+ (BOOL) didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
++ (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 
-    if (userInfo) {
-        [self didReceiveRemoteNotification:userInfo];
-    }
+    if (userInfo)
+        [self invokeLaunchWithNotificationCallback:userInfo];
+    
     return YES;
 
 }
 
-+ (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
++ (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [GrowthPush setDeviceToken:deviceToken];
 }
 
-+ (void) didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
++ (void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [GrowthPush setDeviceToken:nil];
 }
 
-+ (void) didReceiveRemoteNotification:(NSDictionary *)userInfo {
++ (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 
-    if (s_didReceiveRemoteNotificationBlock) {
-        NSError *error = nil;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo options:0 error:&error];
-        if (error) {
-            NSLog(@"failed to parse json: error=%@", [error description]);
-            return;
-        }
+     if(application.applicationState == UIApplicationStateActive)
+         return;
+    
+    [self invokeLaunchWithNotificationCallback:userInfo];
+    
+}
 
-        NSString *json = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
-        if (json) {
-            s_didReceiveRemoteNotificationBlock(json);
-        }
++ (void) invokeLaunchWithNotificationCallback:(NSDictionary *)userInfo {
+    
+    if (!s_didReceiveRemoteNotificationBlock)
+        return;
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfo options:0 error:&error];
+    if (error) {
+        NSLog(@"failed to parse json: error=%@", [error description]);
+        return;
+    }
+    
+    NSString *json = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+    if (json) {
+        s_didReceiveRemoteNotificationBlock(json);
     }
 
 }
 
-GPEnvironment GPEnvironmentFromInteger(int environment) {
++ (GPEnvironment) convertIntToGPEnvironment:(int)environment {
 
     switch (environment) {
-
-        case 0:
-            return GPEnvironmentUnknown;
         case 1:
             return GPEnvironmentDevelopment;
         case 2:
             return GPEnvironmentProduction;
-
+        default:
+            return GPEnvironmentUnknown;
     }
-    return 0;
 
 }
 

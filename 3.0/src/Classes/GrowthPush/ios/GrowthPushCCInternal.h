@@ -18,7 +18,6 @@
 
 /* GrowthPush SDK interface */
 + (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug;
-+ (void)setApplicationId:(NSInteger)applicationId secret:(NSString *)secret environment:(int)environment debug:(BOOL)debug option:(EGPOption)option;
 + (void)requestDeviceToken;
 + (void)trackEvent:(NSString *)name;
 + (void)trackEvent:(NSString *)name value:(NSString *)value;
@@ -31,10 +30,10 @@
 + (void)setDidReceiveNotificationBlock:(void(^) (NSString * json))block;
 
 /* UIApplicationDelegate methods */
-+ (BOOL)didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
-+ (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
-+ (void)didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
-+ (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
++ (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
++ (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
++ (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
++ (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @end
 
