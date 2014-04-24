@@ -49,6 +49,9 @@ static cocos2d::Value convertJson2Value(const rapidjson::Value &v){
     if (v.IsString()) {
         return convertJson2String(v);
     }
+    if (v.IsInt()) {
+        return convertJson2Int(v);
+    }
     if (v.IsNumber()) {
         return convertJson2Double(v);
     }
@@ -69,7 +72,7 @@ static cocos2d::Value convertJson2Map(const rapidjson::Value &v){
     cocos2d::ValueMap dictionary;
 
     for (rapidjson::Value::ConstMemberIterator it = v.MemberonBegin(); it != v.MemberonEnd(); ++it) {
-        auto value = convertJson2Value(it->value);
+        cocos2d::Value value = convertJson2Value(it->value);
         dictionary.insert(std::make_pair(it->name.GetString(), value));
     }
     return cocos2d::Value(dictionary);
@@ -80,8 +83,8 @@ static cocos2d::Value convertJson2Vector(const rapidjson::Value &v){
     
     cocos2d::ValueVector array;
 
-    for (rapidjson::Value::ConstMemberIterator it = v.MemberonBegin(); it != v.MemberonEnd(); ++it) {
-        auto value = convertJson2Value(it->value);
+    for (rapidjson::Value::ConstValueIterator it = v.onBegin(); it != v.onEnd(); ++it) {
+        cocos2d::Value value = convertJson2Value(*it);
         array.push_back(value);
     }
     return cocos2d::Value(array);
@@ -94,6 +97,14 @@ static cocos2d::Value convertJson2String(const rapidjson::Value &v){
 
     return cocos2d::Value(s);
 
+}
+
+static cocos2d::Value convertJson2Int(const rapidjson::Value &v){
+    
+    int d = v.GetInt();
+    
+    return cocos2d::Value(d);
+    
 }
 
 static cocos2d::Value convertJson2Double(const rapidjson::Value &v){
