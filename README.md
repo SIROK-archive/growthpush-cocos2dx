@@ -1,7 +1,9 @@
-growthpush-cocos2dx for Cocos2d-x 3.0
+growthpush-cocos2dx for Cocos2d-x 2.x
 ===================
 
 Growth Push SDK for Cocos2d-x
+
+※ if you using Cocos2d-x 3.0 above, jump to [GrowthPushCocos2dx3](https://github.com/SIROK/growthpush-cocos2dx3)
 
 Install
 ----------------
@@ -9,13 +11,13 @@ Common
 ----------------
 1. Copy "src/Classes/GrowthPush" to "/path/to/your_project/Classes/"
 
-iOS　→　(http://blog.growthpush.com/post/71159185584/ios-cocos2d-x)
+iOS
 ----------------
 1. Copy "GrowthPush.framework" library to "/path/to/your_project/proj.ios/Frameworks/"
 2. Add "Security.framework" library to your Xcode project
 3. Add "/path/to/your_project/Classes/GrowthPush" to Xcode
 
-Android　→　(http://blog.growthpush.com/post/74729590395/android-cocos2d-x)
+Android
 ----------------
 1. Copy following jar files to "/path/to/your_project/proj.android/libs/"
       * android-support-v4.jar
@@ -38,22 +40,18 @@ AndroidManifest.xml
     <application android:label="@string/app_name"
         android:icon="@drawable/icon">
 
-        <activity android:name="org.cocos2dx.cpp.AppActivity"
+        <activity android:name="jp.example.sample.SampleActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
                   android:configChanges="orientation"
                   android:launchMode="singleTask">
-            <!-- Tell NativeActivity the name of our .so -->
-            <meta-data android:name="android.app.lib_name"
-                       android:value="cocos2dcpp" />
-            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name="com.growthpush.view.AlertActivity"
                   android:configChanges="orientation|keyboardHidden"
                   android:launchMode="singleInstance"
@@ -65,7 +63,7 @@ AndroidManifest.xml
                         <category android:name="jp.example.sample" />
                 </intent-filter>
         </receiver>
-    </application>
+        </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -77,14 +75,28 @@ AndroidManifest.xml
     <uses-permission android:name="jp.example.sample.permission.C2D_MESSAGE" />
 ```
 
-AppActivity.java
+SampleActivity.java
 
 ```
-package org.cocos2dx.cpp;
-
 import com.growthpush.cocos2dx.GPCocos2dxActivity;
 
-public class AppActivity extends GPCocos2dxActivity {
+public class SampleActivity extends GPCocos2dxActivity {
+
+    protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+    }
+
+    public Cocos2dxGLSurfaceView onCreateView() {
+    	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
+    	// GrowthPushCocos2dxPlugin should create stencil buffer
+    	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
+
+    	return glSurfaceView;
+    }
+
+    static {
+        System.loadLibrary("cocos2dcpp");
+    }
 }
 ```
 
@@ -97,6 +109,7 @@ Cocos2d-x usage
 USING_NS_GROWTHPUSH;
 
 GrowthPush::initialize(YOUR_APP_ID, "YOUR_APP_SECRET", YOUR_APP_ENV, YOUR_DEBUG_FLAG);
+GrowthPush::initialize(YOUR_APP_ID, "YOUR_APP_SECRET", YOUR_APP_ENV, YOUR_DEBUG_FLAG, YOUR_APP_OPTION);
 
 GrowthPush::registerDeviceToken();  // iOS only
 GrowthPush::registerDeviceToken("YOUR_SENDER_ID");  // if you need Android
@@ -112,13 +125,6 @@ GrowthPush::setTag("TagName", "TagValue");
 GrowthPush::clearBadge();
 
 GrowthPush::launchWithNotification(this, gp_remote_notification_selector(AppDelegate::CALLBACK_FUNCTION));
-
-// for C++11 (in the future)
-//GrowthPush::launchWithNotification(CC_CALLBACK_1(AppDelegate::CALLBACK_FUNCTION, this));
-//GrowthPush::launchWithNotification(std::bind(&AppDelegate::CALLBACK_FUNCTION, this, std::placeholders::_1));
-//GrowthPush::launchWithNotification([](ValueMap json) {
-//    // do something.
-//});
 ```
 
 Example
@@ -126,7 +132,7 @@ Example
 ```
 bool AppDelegate::applicationDidFinishLaunching() {
     ... (code) ...
-    
+
     // run
     pDirector->runWithScene(pScene);
 
@@ -134,9 +140,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     const char *secrect = "YOUR_APP_SECRET";
     GPEnvironment environment = GPEnvironmentDevelopment;
     bool debug = true;
+    EGPOption option = EGPOptionAll;
     const char *senderID = "YOUR_SENDER_ID";
-    
-    GrowthPush::initialize(appID, secrect, environment, debug);
+
+    GrowthPush::initialize(appID, secrect, environment, debug, option);
     GrowthPush::registerDeviceToken(senderID);
     GrowthPush::setDeviceTags();
     GrowthPush::trackEvent("Event");
@@ -144,17 +151,29 @@ bool AppDelegate::applicationDidFinishLaunching() {
     GrowthPush::setTag("Tag");
     GrowthPush::setTag("Tag", "Value");
     GrowthPush::clearBadge();
-    
+
     GrowthPush::launchWithNotification(this, gp_remote_notification_selector(AppDelegate::didReceiveRemoteNotification));
-    
+
     ... (code) ...
 }
 
-void AppDelegate::didReceiveRemoteNotification(Value json) {
+void AppDelegate::didReceiveRemoteNotification(CCDictionary *json)
+{
     // ex.) {"aps":{"badge":1,"sound":"default","alert":"Message"},"growthpush":{"notificationId":1234}}
-    CCLOG("%s", json.getDescription().c_str());
-    auto growthpush = json.asValueMap()["growthpush"].asValueMap();
-    int notificationId = growthpush["notificationId"].asInt();
-    GrowthPush::trackEvent(StringUtils::format("Launch via push notification %d", notificationId));
+    CCDictionary *growthpush = (CCDictionary *)json->objectForKey("growthpush");
+    if (growthpush) {
+        CCObject *notificationIDObject = growthpush->objectForKey("notificationId");
+        if (notificationIDObject) {
+#if 0x00020100 <= COCOS2D_VERSION
+            /* use CCDouble */
+            int notificationID = ((CCDouble *)notificationIDObject)->getValue();
+#else
+            /* cannot use CCDouble */
+            int notificationID = ((CCString *)notificationIDObject)->intValue();
+#endif
+            GrowthPush::trackEvent(CCString::createWithFormat("Launch via push notification %d", notificationID));
+        }
+    }
 }
+
 ```
