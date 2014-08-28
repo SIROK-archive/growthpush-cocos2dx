@@ -3,7 +3,7 @@ growthpush-cocos2dx for Cocos2d-x 2.x
 
 Growth Push SDK for Cocos2d-x
 
-※ if you using Cocos2d-x 3.0 above, jump to [GrowthPushCocos2dx3](https://github.com/SIROK/growthpush-cocos2dx3)
+__※ if you using Cocos2d-x 3.0 above, jump to [GrowthPushCocos2dx3](https://github.com/SIROK/growthpush-cocos2dx3)__
 
 Install
 ----------------
